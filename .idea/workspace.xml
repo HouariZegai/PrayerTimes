@@ -2,15 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/unirest_java_1_4_9.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/httpcore_4_2_3.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PrayerTimes.iml" beforeDir="false" afterPath="$PROJECT_DIR$/PrayerTimes.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/PrayerTimes/com/houarizegai/prayertimes/java/controllers/PrayerTimesController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PrayerTimes/com/houarizegai/prayertimes/java/controllers/PrayerTimesController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/PrayerTimes/com/houarizegai/prayertimes/resources/css/prayer-times.css" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PrayerTimes/com/houarizegai/prayertimes/resources/css/prayer-times.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/PrayerTimes/com/houarizegai/prayertimes/resources/views/PrayerTimes.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PrayerTimes/com/houarizegai/prayertimes/resources/views/PrayerTimes.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/houarizegai/prayertimes/java/controllers/PrayerTimesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/houarizegai/prayertimes/java/controllers/PrayerTimesController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/houarizegai/prayertimes/resources/css/prayer-times.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/houarizegai/prayertimes/resources/css/prayer-times.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/houarizegai/prayertimes/resources/views/PrayerTimes.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/houarizegai/prayertimes/resources/views/PrayerTimes.fxml" afterDir="false" />
     </list>
     <ignored path="JavaFxApplication.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -66,11 +62,12 @@
     <session id="-991350130">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="1" />
+          <entry key="project.closed" value="2" />
           <entry key="project.open.time.1" value="1" />
           <entry key="project.open.time.148" value="1" />
           <entry key="project.open.time.188" value="1" />
-          <entry key="project.opened" value="3" />
+          <entry key="project.open.time.2" value="1" />
+          <entry key="project.opened" value="4" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -95,13 +92,13 @@
         <counts>
           <entry key="css" value="118" />
           <entry key="fxml" value="45" />
-          <entry key="java" value="2436" />
+          <entry key="java" value="2668" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="CSS" value="118" />
-          <entry key="JAVA" value="2436" />
+          <entry key="JAVA" value="2668" />
           <entry key="XML" value="45" />
         </counts>
       </usages-collector>
@@ -115,14 +112,12 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/houarizegai/prayertimes/java/controllers/PrayerTimesController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="202">
-              <caret line="99" column="34" lean-forward="true" selection-start-line="99" selection-start-column="34" selection-end-line="99" selection-end-column="34" />
+            <state relative-caret-position="158">
+              <caret line="56" column="17" lean-forward="true" selection-start-line="56" selection-start-column="17" selection-end-line="56" selection-end-column="17" />
               <folding>
-                <element signature="method#initialize#0;class#PrayerTimesController#0" />
                 <element signature="method#initComboWilaya#0;class#PrayerTimesController#0" />
                 <element signature="method#getItemList#0;class#PrayerTimesController#0" />
                 <element signature="method#readJsonFromFile#0;class#PrayerTimesController#0" />
-                <element signature="method#getJsonPrayerTimes#0;class#PrayerTimesController#0" />
               </folding>
             </state>
           </provider>
@@ -185,6 +180,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -238,7 +234,6 @@
         </subPane>
       </pane>
       <pane id="Scope" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -251,9 +246,9 @@
     <property name="OverrideImplement.combined" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1540584193843" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1540588538477" />
     <property name="dynamic.classpath" value="false" />
-    <property name="last_opened_file_path" value="F:/Library/Jars/REST Api/unirest-java-1.4.9.jar!/" />
+    <property name="last_opened_file_path" value="F:/Library/Jars/REST Api/httpcore-4.4.10.jar!/" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
@@ -379,17 +374,19 @@
       <workItem from="1359379250712" duration="1302000" />
       <workItem from="1540498205255" duration="519000" />
       <workItem from="1540500348546" duration="1971000" />
-      <workItem from="1540566731300" duration="8698000" />
+      <workItem from="1540566731300" duration="11353000" />
+      <workItem from="1540588042168" duration="480000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="12490000" />
+    <option name="totallyTimeSpent" value="15625000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.6703755" visible="true" weight="0.26172465" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.6703755" visible="true" weight="0.2655068" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info id="Favorites" order="2" />
       <window_info id="Designer" order="3" />
@@ -398,7 +395,7 @@
       <window_info id="Capture Tool" order="6" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32569557" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32569557" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -499,14 +496,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/houarizegai/prayertimes/java/controllers/PrayerTimesController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="202">
-          <caret line="99" column="34" lean-forward="true" selection-start-line="99" selection-start-column="34" selection-end-line="99" selection-end-column="34" />
+        <state relative-caret-position="158">
+          <caret line="56" column="17" lean-forward="true" selection-start-line="56" selection-start-column="17" selection-end-line="56" selection-end-column="17" />
           <folding>
-            <element signature="method#initialize#0;class#PrayerTimesController#0" />
             <element signature="method#initComboWilaya#0;class#PrayerTimesController#0" />
             <element signature="method#getItemList#0;class#PrayerTimesController#0" />
             <element signature="method#readJsonFromFile#0;class#PrayerTimesController#0" />
-            <element signature="method#getJsonPrayerTimes#0;class#PrayerTimesController#0" />
           </folding>
         </state>
       </provider>
@@ -575,7 +570,7 @@
       </state>
       <state key="ProjectLibrariesConfigurable.UI">
         <settings>
-          <last-edited>unirest-java-1.4.9</last-edited>
+          <last-edited>jfoenix-8.0.1</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>

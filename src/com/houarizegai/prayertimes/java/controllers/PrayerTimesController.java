@@ -6,6 +6,9 @@ import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -13,6 +16,7 @@ import javafx.geometry.NodeOrientation;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
+import javafx.util.Duration;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -23,6 +27,9 @@ import java.net.URL;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 
@@ -39,8 +46,10 @@ public class PrayerTimesController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        initDateAndClock();
         initComboWilaya();
 
+        // Initialize List of Prayer Times
         listTimes.getItems().clear();
         listTimes.getItems().add(getItemList("الفجر", ""));
         listTimes.getItems().add(getItemList("الشروق", ""));
@@ -48,6 +57,26 @@ public class PrayerTimesController implements Initializable {
         listTimes.getItems().add(getItemList("العصر", ""));
         listTimes.getItems().add(getItemList("المغرب", ""));
         listTimes.getItems().add(getItemList("العشاء", ""));
+
+        // Default value
+        comboWilaya.getSelectionModel().select("Tiaret");
+        getJsonPrayerTimes(comboWilaya.getSelectionModel().getSelectedItem());
+    }
+
+    private void initDateAndClock() {
+        // initialize Clock Showing in home
+        Timeline clock = new Timeline(new KeyFrame(Duration.ZERO, e -> {
+            Date date = new Date();
+            DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            lblDate.setText(dateFormat.format(date));
+
+            dateFormat = new SimpleDateFormat("HH:mm:ss");
+            lblTime.setText(dateFormat.format(date));
+        }),
+                new KeyFrame(Duration.seconds(1))
+        );
+        clock.setCycleCount(Animation.INDEFINITE);
+        clock.play();
     }
 
     private void initComboWilaya() {
@@ -99,12 +128,15 @@ public class PrayerTimesController implements Initializable {
 
     private void getJsonPrayerTimes(String wilaya) { // Get prayer times from WebService
         try {
+            System.out.println("Before -----");
+
             HttpResponse<JsonNode> jsonResponse
-                    = Unirest.get("https://api.pray.zone/v2/times/today.json")
-                    .header("accept", "application/json")
-                    .queryString("city", wilaya)
+                    = Unirest.get("https://api.pray.zone/v2/times/today.json?city=Alger")
                     .asJson();
-            JSONObject jsonDate = new JSONObject(jsonResponse)
+
+            System.out.println("After -----");
+
+            JSONObject jsonDate = new JSONObject(jsonResponse.getBody().toString())
                     .getJSONObject("results")
                     .getJSONArray("datetime")
                     .getJSONObject(0)
