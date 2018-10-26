@@ -11,7 +11,7 @@ public class Laucher extends Application {
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("/com/houarizegai/prayertimes/resources/views/PrayerTimes.fxml"));
         stage.setScene(new Scene(root));
-        stage.setTitle("Prayer Times");
+        stage.setTitle("أوقات الصلاة");
         stage.show();
     }
 

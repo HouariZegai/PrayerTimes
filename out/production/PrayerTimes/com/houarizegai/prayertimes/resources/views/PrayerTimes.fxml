@@ -27,11 +27,7 @@
             <Label styleClass="lbl-name" text="المدينة :" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <Label fx:id="lblDate" styleClass="lbl-value" text="11/10/2018" />
             <Label fx:id="lblTime" styleClass="lbl-value" text="13:53" GridPane.rowIndex="1" />
-            <JFXComboBox fx:id="comboWilaya" focusColor="#2196f3" prefHeight="25.0" prefWidth="83.0" promptText="الولاية" styleClass="check-value" GridPane.rowIndex="2">
-                <items>
-                    
-                </items>
-            </JFXComboBox>
+            <JFXComboBox focusColor="#2196f3" prefHeight="25.0" prefWidth="83.0" promptText="الولاية" styleClass="check-value" GridPane.rowIndex="2" />
          </children>
       </GridPane>
       <JFXListView fx:id="listTimes" prefHeight="400.0" prefWidth="400.0" />
