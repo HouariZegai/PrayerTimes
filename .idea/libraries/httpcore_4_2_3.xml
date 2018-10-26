@@ -1,7 +1,7 @@
 <component name="libraryTable">
-  <library name="unirest-java-1.4.9">
+  <library name="httpcore-4.2.3">
     <CLASSES>
-      <root url="jar://F:/Library/Jars/REST Api/unirest-java-1.4.9.jar!/" />
+      <root url="jar://F:/Library/Jars/REST Api/httpcore-4.2.3.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

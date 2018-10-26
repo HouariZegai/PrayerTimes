@@ -8,6 +8,8 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="jfoenix-8.0.1" level="project" />
+    <orderEntry type="library" name="json-20170516" level="project" />
+    <orderEntry type="library" name="httpcore-4.2.3" level="project" />
     <orderEntry type="library" name="unirest-java-1.4.9" level="project" />
   </component>
 </module>

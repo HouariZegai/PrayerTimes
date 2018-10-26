@@ -1,0 +1,44 @@
+{
+  "code": 200,
+  "status": "OK",
+  "results": {
+    "datetime": [
+      {
+        "times": {
+          "Imsak": "05:35",
+          "Sunrise": "07:05",
+          "Fajr": "05:45",
+          "Dhuhr": "12:39",
+          "Asr": "15:42",
+          "Sunset": "18:12",
+          "Maghrib": "18:22",
+          "Isha": "19:32",
+          "Midnight": "23:59"
+        },
+        "date": {
+          "timestamp": 1540512000,
+          "gregorian": "2018-10-26",
+          "hijri": "1440-02-17"
+        }
+      }
+    ],
+    "location": {
+      "latitude": 35.367355346679688,
+      "longitude": 1.3220322132110596,
+      "elevation": 1049.0,
+      "city": "Tiaret",
+      "country": "Algeria",
+      "country_code": "DZ",
+      "timezone": "Africa/Algiers",
+      "local_offset": 1.0
+    },
+    "settings": {
+      "timeformat": "HH:mm",
+      "school": "Ithna Ashari",
+      "juristic": "Shafii",
+      "highlat": "None",
+      "fajr_angle": 18.0,
+      "isha_angle": 18.0
+    }
+  }
+}
