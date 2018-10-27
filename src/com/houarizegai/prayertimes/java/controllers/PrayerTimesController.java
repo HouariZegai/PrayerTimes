@@ -132,6 +132,7 @@ public class PrayerTimesController implements Initializable {
                 .replaceAll("é", "e")
                 .replaceAll("è", "e")
                 .replaceAll("â", "a")
+                .replaceAll("'", "-")
                 .replaceAll("ï", "i");
 
         try {
@@ -140,8 +141,20 @@ public class PrayerTimesController implements Initializable {
                     .queryString("city", wilaya)
                     .asJson();
 
-            JSONObject jsonDate = new JSONObject(jsonResponse.getBody().toString())
-                    .getJSONObject("results")
+            JSONObject jsonRoot = new JSONObject(jsonResponse.getBody().toString());
+
+            if(!jsonRoot.has("results")) {
+                System.out.println("Not Found !");
+                // Make Empty prayer times
+                for(int i = 0; i < listTimes.getItems().size(); i++) {
+                    ((Label) listTimes.getItems().get(i).getChildren().get(1)).setText("--:--");
+                }
+
+                return;
+            }
+
+            JSONObject jsonDate =
+                    jsonRoot.getJSONObject("results")
                     .getJSONArray("datetime")
                     .getJSONObject(0)
                     .getJSONObject("times");

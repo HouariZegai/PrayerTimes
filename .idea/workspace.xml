@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PrayerTimes.iml" beforeDir="false" afterPath="$PROJECT_DIR$/PrayerTimes.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/PrayerTimes/com/houarizegai/prayertimes/java/controllers/PrayerTimesController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PrayerTimes/com/houarizegai/prayertimes/java/controllers/PrayerTimesController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/houarizegai/prayertimes/java/controllers/PrayerTimesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/houarizegai/prayertimes/java/controllers/PrayerTimesController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/houarizegai/prayertimes/resources/utils/wilaya.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/houarizegai/prayertimes/resources/utils/wilaya.json" afterDir="false" />
     </list>
     <ignored path="JavaFxApplication.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -77,7 +75,7 @@
           <entry key="css" value="1" />
           <entry key="fxml" value="7" />
           <entry key="java" value="5" />
-          <entry key="json" value="4" />
+          <entry key="json" value="6" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
@@ -85,7 +83,7 @@
           <entry key="CLASS" value="1" />
           <entry key="CSS" value="1" />
           <entry key="JAVA" value="5" />
-          <entry key="JSON" value="4" />
+          <entry key="JSON" value="6" />
           <entry key="XML" value="7" />
         </counts>
       </usages-collector>
@@ -93,13 +91,15 @@
         <counts>
           <entry key="css" value="118" />
           <entry key="fxml" value="45" />
-          <entry key="java" value="2871" />
+          <entry key="java" value="3049" />
+          <entry key="json" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="CSS" value="118" />
-          <entry key="JAVA" value="2871" />
+          <entry key="JAVA" value="3049" />
+          <entry key="JSON" value="2" />
           <entry key="XML" value="45" />
         </counts>
       </usages-collector>
@@ -110,11 +110,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/houarizegai/prayertimes/java/controllers/PrayerTimesController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
-              <caret line="133" column="30" selection-start-line="133" selection-start-column="30" selection-end-line="133" selection-end-column="30" />
+            <state relative-caret-position="202">
+              <caret line="146" column="27" selection-start-line="146" selection-start-column="27" selection-end-line="146" selection-end-column="27" />
               <folding>
                 <element signature="method#initComboWilaya#0;class#PrayerTimesController#0" />
                 <element signature="method#getItemList#0;class#PrayerTimesController#0" />
@@ -124,11 +124,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/houarizegai/prayertimes/resources/utils/wilaya.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4">
-              <caret line="54" column="23" selection-start-line="54" selection-start-column="12" selection-end-line="54" selection-end-column="23" />
+            <state relative-caret-position="165">
+              <caret line="209" column="18" selection-start-line="209" selection-start-column="18" selection-end-line="209" selection-end-column="18" />
             </state>
           </provider>
         </entry>
@@ -145,6 +145,12 @@
       </list>
     </option>
   </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>boumer</find>
+      <find>tin</find>
+    </findStrings>
+  </component>
   <component name="FindManager">
     <FindUsagesManager>
       <setting name="OPEN_NEW_TAB" value="false" />
@@ -158,12 +164,12 @@
       <list>
         <option value="$PROJECT_DIR$/src/com/houarizegai/prayertimes/java/Laucher.java" />
         <option value="$PROJECT_DIR$/src/com/houarizegai/prayertimes/resources/views/PrayerItem.fxml" />
-        <option value="$PROJECT_DIR$/src/com/houarizegai/prayertimes/resources/utils/wilaya.json" />
         <option value="$PROJECT_DIR$/src/com/houarizegai/prayertimes/resources/css/prayer-times.css" />
         <option value="$PROJECT_DIR$/src/com/houarizegai/prayertimes/resources/views/PrayerTimes.fxml" />
         <option value="$PROJECT_DIR$/src/com/houarizegai/prayertimes/resources/utils/restResponsedemo.json" />
         <option value="$PROJECT_DIR$/src/com/houarizegai/prayertimes/java/TestRest.java" />
         <option value="$PROJECT_DIR$/src/com/houarizegai/prayertimes/java/controllers/PrayerTimesController.java" />
+        <option value="$PROJECT_DIR$/src/com/houarizegai/prayertimes/resources/utils/wilaya.json" />
       </list>
     </option>
   </component>
@@ -257,7 +263,7 @@
     <property name="OverrideImplement.combined" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1540633633308" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1540638587193" />
     <property name="dynamic.classpath" value="false" />
     <property name="last_opened_file_path" value="F:/Library/Jars/REST Api/httpcomponents-core-4.4.10/lib/httpcore-nio-4.4.10.jar!/" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
@@ -404,18 +410,18 @@
       <workItem from="1540566731300" duration="11353000" />
       <workItem from="1540588042168" duration="1668000" />
       <workItem from="1540627832602" duration="60000" />
-      <workItem from="1540631345855" duration="2100000" />
+      <workItem from="1540631345855" duration="5244000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="18973000" />
+    <option name="totallyTimeSpent" value="22117000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.6703755" visible="true" weight="0.2730711" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.6703755" visible="true" weight="0.2730711" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info id="Favorites" order="2" />
       <window_info id="Designer" order="3" />
@@ -424,7 +430,7 @@
       <window_info id="Capture Tool" order="6" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32569557" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32569557" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -523,22 +529,22 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/houarizegai/prayertimes/resources/utils/wilaya.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="209" column="18" selection-start-line="209" selection-start-column="18" selection-end-line="209" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/houarizegai/prayertimes/java/controllers/PrayerTimesController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="133" column="30" selection-start-line="133" selection-start-column="30" selection-end-line="133" selection-end-column="30" />
+        <state relative-caret-position="202">
+          <caret line="146" column="27" selection-start-line="146" selection-start-column="27" selection-end-line="146" selection-end-column="27" />
           <folding>
             <element signature="method#initComboWilaya#0;class#PrayerTimesController#0" />
             <element signature="method#getItemList#0;class#PrayerTimesController#0" />
             <element signature="method#readJsonFromFile#0;class#PrayerTimesController#0" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/houarizegai/prayertimes/resources/utils/wilaya.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4">
-          <caret line="54" column="23" selection-start-line="54" selection-start-column="12" selection-end-line="54" selection-end-column="23" />
         </state>
       </provider>
     </entry>
