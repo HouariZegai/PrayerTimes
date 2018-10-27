@@ -127,14 +127,18 @@ public class PrayerTimesController implements Initializable {
     }
 
     private void getJsonPrayerTimes(String wilaya) { // Get prayer times from WebService
+        wilaya = wilaya // format Wilaya
+                .replaceAll(" ", "-")
+                .replaceAll("é", "e")
+                .replaceAll("è", "e")
+                .replaceAll("â", "a")
+                .replaceAll("ï", "i");
+
         try {
-            System.out.println("Before -----");
-
             HttpResponse<JsonNode> jsonResponse
-                    = Unirest.get("https://api.pray.zone/v2/times/today.json?city=Alger")
+                    = Unirest.get("https://api.pray.zone/v2/times/today.json")
+                    .queryString("city", wilaya)
                     .asJson();
-
-            System.out.println("After -----");
 
             JSONObject jsonDate = new JSONObject(jsonResponse.getBody().toString())
                     .getJSONObject("results")
