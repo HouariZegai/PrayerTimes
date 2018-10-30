@@ -26,6 +26,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -64,7 +65,7 @@ public class PrayerTimesController implements Initializable {
     }
 
     private void initDateAndClock() {
-        // initialize Clock Showing in home
+        // initialize Clock Showing in UI of Prayer times
         Timeline clock = new Timeline(new KeyFrame(Duration.ZERO, e -> {
             Date date = new Date();
             DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
@@ -80,9 +81,15 @@ public class PrayerTimesController implements Initializable {
     }
 
     private void initComboWilaya() {
-        // Add wilaya name to Comnobox
+        // Add wilaya name to Combobox
         comboWilaya.getItems().clear();
-        String jsonWilayaPath = "F:\\Projects\\JavaProjects\\Javafx\\PrayerTimes\\src\\com\\houarizegai\\prayertimes\\resources\\utils\\wilaya.json";
+
+        // Get Path of Project
+        Path currentRelativePath = Paths.get("");
+        // convert the path to absolute
+        String currentAbsolutePath = currentRelativePath.toAbsolutePath().toString();
+
+        String jsonWilayaPath = currentAbsolutePath + "\\src\\com\\houarizegai\\prayertimes\\resources\\utils\\wilaya.json";
         JSONArray jsonArray = new JSONArray(readJsonFromFile(jsonWilayaPath));
         for (int i = 0; i < jsonArray.length(); i++) {
             JSONObject wilayaObj = jsonArray.getJSONObject(i);
