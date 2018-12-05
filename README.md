@@ -10,5 +10,5 @@ Desktop app for calculating Muslim prayer times and setting and alarm for the pr
 * Simple to use 
 * All cities of Algeria have been added
 
-# Instalation
+# Installation
 * Clone the project ` git clone https://github.com/HouariZegai/PrayerTimes.git`
