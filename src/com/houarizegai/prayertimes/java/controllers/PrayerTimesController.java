@@ -1,5 +1,6 @@
 package com.houarizegai.prayertimes.java.controllers;
 
+import com.houarizegai.prayertimes.java.utils.Constants;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXListView;
 import com.mashape.unirest.http.HttpResponse;
@@ -12,27 +13,17 @@ import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.NodeOrientation;
 import javafx.scene.control.Label;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
-import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
-import java.nio.charset.Charset;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.ResourceBundle;
-import java.util.Scanner;
 
 public class PrayerTimesController implements Initializable {
 
@@ -48,7 +39,7 @@ public class PrayerTimesController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         initDateAndClock();
-        initComboWilaya();
+        initComboCities();
 
         // Initialize List of Prayer Times
         listTimes.getItems().clear();
@@ -59,7 +50,7 @@ public class PrayerTimesController implements Initializable {
         listTimes.getItems().add(getItemList("المغرب", ""));
         listTimes.getItems().add(getItemList("العشاء", ""));
 
-        // Default value
+        // Make Tiaret city as default
         comboWilaya.getSelectionModel().select("Tiaret");
         getJsonPrayerTimes(comboWilaya.getSelectionModel().getSelectedItem());
     }
@@ -80,22 +71,10 @@ public class PrayerTimesController implements Initializable {
         clock.play();
     }
 
-    private void initComboWilaya() {
-        // Add wilaya name to Combobox
+    private void initComboCities() {
+        // Add cities names to ComboBox
         comboWilaya.getItems().clear();
-
-        // Get Path of Project
-        Path currentRelativePath = Paths.get("");
-        // convert the path to absolute
-        String currentAbsolutePath = currentRelativePath.toAbsolutePath().toString();
-
-        String jsonWilayaPath = currentAbsolutePath + "\\src\\com\\houarizegai\\prayertimes\\resources\\utils\\wilaya.json";
-        JSONArray jsonArray = new JSONArray(readJsonFromFile(jsonWilayaPath));
-        for (int i = 0; i < jsonArray.length(); i++) {
-            JSONObject wilayaObj = jsonArray.getJSONObject(i);
-            String wilayaName = wilayaObj.getString("nom");
-            comboWilaya.getItems().add(wilayaName);
-        }
+        comboWilaya.getItems().addAll(Constants.DZ_CITIES);
 
         // Add Event to ComboBox
         comboWilaya.setOnAction(e -> {
@@ -115,26 +94,8 @@ public class PrayerTimesController implements Initializable {
         return prayerItem;
     }
 
-    private String readJsonFromFile(String pathname) { // Read json file and convert it to String
-        try {
-            File file = new File(pathname);
-
-            StringBuilder fileContents = new StringBuilder((int) file.length());
-
-            try (Scanner scanner = new Scanner(file)) {
-                while (scanner.hasNextLine()) {
-                    fileContents.append(scanner.nextLine() + System.lineSeparator());
-                }
-                return fileContents.toString();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    private void getJsonPrayerTimes(String wilaya) { // Get prayer times from WebService
-        wilaya = wilaya // format Wilaya
+    private void getJsonPrayerTimes(String city) { // Get prayer times from WebService
+        city = city // format City
                 .replaceAll(" ", "-")
                 .replaceAll("é", "e")
                 .replaceAll("è", "e")
@@ -145,7 +106,7 @@ public class PrayerTimesController implements Initializable {
         try {
             HttpResponse<JsonNode> jsonResponse
                     = Unirest.get("https://api.pray.zone/v2/times/today.json")
-                    .queryString("city", wilaya)
+                    .queryString("city", city)
                     .asJson();
 
             JSONObject jsonRoot = new JSONObject(jsonResponse.getBody().toString());

@@ -8,9 +8,7 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="jfoenix-8.0.1" level="project" />
-    <orderEntry type="library" name="json-20170516" level="project" />
-    <orderEntry type="library" name="unirest-java-1.4.9" level="project" />
-    <orderEntry type="library" name="commons-codec-1.10" level="project" />
-    <orderEntry type="library" name="httpcore-ab-4.4.10" level="project" />
+    <orderEntry type="library" name="fontawesomefx-commons-8.15" level="project" />
+    <orderEntry type="library" name="httpcore-nio-4.4.10" level="project" />
   </component>
 </module>
