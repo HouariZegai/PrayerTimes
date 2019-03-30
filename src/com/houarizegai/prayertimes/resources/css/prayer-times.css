@@ -23,6 +23,7 @@
 	-fx-prompt-text-fill: #EEE;
 	-jfx-unfocus-color: #DDD;
 	-jfx-focus-color: #FFF;
+	-fx-text-fill: #FFF;
 	-fx-cursor: hand;
 	-fx-font-size: 18px;
 }

@@ -1,5 +1,6 @@
 package com.houarizegai.prayertimes.java.controllers;
 
+import com.houarizegai.prayertimes.java.Launcher;
 import com.houarizegai.prayertimes.java.models.PrayerTimes;
 import com.houarizegai.prayertimes.java.models.PrayerTimesBuilder;
 import com.houarizegai.prayertimes.java.utils.Constants;
@@ -14,12 +15,15 @@ import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.transform.Scale;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.json.JSONObject;
 
@@ -33,46 +37,26 @@ import java.util.ResourceBundle;
 public class PrayerTimesController implements Initializable {
 
     @FXML
-    private Label lblDate;
-
-    @FXML
-    private Label lblTimeH;
-
-    @FXML
-    private Label lblTimeSeparator;
-
-    @FXML
-    private Label lblTimeM;
-
-    @FXML
-    private Label lblTimeSeparator2;
-
-    @FXML
-    private Label lblTimeS;
-
-    @FXML
-    private Label lblPrayerFajr;
-
-    @FXML
-    private Label lblPrayerSunrise;
-
-    @FXML
-    private Label lblPrayerDhuhr;
-
-    @FXML
-    private Label lblPrayerAsr;
-
-    @FXML
-    private Label lblPrayerMaghrib;
-
-    @FXML
-    private Label lblPrayerIsha;
+    private StackPane menuBar;
 
     @FXML
     private JFXHamburger hamburgerMenu;
 
     @FXML
-    private JFXComboBox<String> comboCity;
+    private JFXComboBox<String> comboCities;
+
+    @FXML
+    private Label lblDate;
+
+    @FXML
+    private Label lblTimeH, lblTimeSeparator, lblTimeM, lblTimeSeparator2, lblTimeS;
+
+    @FXML
+    private Label lblPrayerFajr, lblPrayerSunrise, lblPrayerDhuhr, lblPrayerAsr, lblPrayerMaghrib, lblPrayerIsha;
+
+    // For Make Stage Drageable
+    private double xOffset = 0;
+    private double yOffset = 0;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -80,18 +64,25 @@ public class PrayerTimesController implements Initializable {
         initComboCities();
 
         // Make Tiaret city as default
-        comboCity.getSelectionModel().select("Tiaret");
-        getJsonPrayerTimes(comboCity.getSelectionModel().getSelectedItem());
-    }
+        comboCities.getSelectionModel().select("Tiaret");
+        getJsonPrayerTimes(comboCities.getSelectionModel().getSelectedItem());
 
-    @FXML
-    private void onClose() {
-        Platform.exit();
-    }
-
-    @FXML
-    private void onHide() {
-
+        // For make stage Drageable
+        menuBar.setOnMousePressed(event -> {
+            xOffset = event.getSceneX();
+            yOffset = event.getSceneY();
+        });
+        menuBar.setOnMouseDragged(event -> {
+            Launcher.stage.setX(event.getScreenX() - xOffset);
+            Launcher.stage.setY(event.getScreenY() - yOffset);
+            Launcher.stage.setOpacity(0.7f);
+        });
+        menuBar.setOnDragDone(e -> {
+            Launcher.stage.setOpacity(1.0f);
+        });
+        menuBar.setOnMouseReleased(e -> {
+            Launcher.stage.setOpacity(1.0f);
+        });
     }
 
     private void initDateAndClock() {
@@ -108,8 +99,8 @@ public class PrayerTimesController implements Initializable {
             lblTimeH.setText(time[0]);
 
             // If new day change the prayer times
-            if(dateFormat.equals("00:00:00") && comboCity.getSelectionModel() != null) {
-                getJsonPrayerTimes(comboCity.getSelectionModel().getSelectedItem());
+            if(dateFormat.equals("00:00:00") && comboCities.getSelectionModel() != null) {
+                getJsonPrayerTimes(comboCities.getSelectionModel().getSelectedItem());
             }
         });
 
@@ -136,12 +127,12 @@ public class PrayerTimesController implements Initializable {
 
     private void initComboCities() {
         // Add cities names to ComboBox
-        comboCity.getItems().clear();
-        comboCity.getItems().addAll(Constants.DZ_CITIES);
+        comboCities.getItems().clear();
+        comboCities.getItems().addAll(Constants.DZ_CITIES);
 
         // Add Event to ComboBox
-        comboCity.setOnAction(e -> {
-            getJsonPrayerTimes(comboCity.getSelectionModel().getSelectedItem());
+        comboCities.setOnAction(e -> {
+            getJsonPrayerTimes(comboCities.getSelectionModel().getSelectedItem());
         });
     }
 
@@ -208,4 +199,13 @@ public class PrayerTimesController implements Initializable {
         lblPrayerIsha.setText(prayerTimes.getIsha());
     }
 
+    @FXML
+    private void onClose() {
+        Platform.exit();
+    }
+
+    @FXML
+    private void onHide() {
+        Launcher.stage.setIconified(true);
+    }
 }

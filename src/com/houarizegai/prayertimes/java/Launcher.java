@@ -5,13 +5,17 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
-public class Laucher extends Application {
+public class Launcher extends Application {
+    public static Stage stage;
+
     @Override
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("/com/houarizegai/prayertimes/resources/views/PrayerTimes.fxml"));
         stage.setScene(new Scene(root));
-        stage.setTitle("أوقات الصلاة");
+        stage.initStyle(StageStyle.UNDECORATED);
+        Launcher.stage = stage;
         stage.show();
     }
 

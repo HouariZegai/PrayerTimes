@@ -88,7 +88,7 @@
       </VBox>
    </center>
    <top>
-      <StackPane styleClass="menu-bar" BorderPane.alignment="CENTER">
+      <StackPane fx:id="menuBar" styleClass="menu-bar" BorderPane.alignment="CENTER">
          <children>
             <HBox alignment="CENTER_LEFT" maxWidth="-Infinity" spacing="20.0" StackPane.alignment="CENTER_LEFT">
                <StackPane.margin>
@@ -96,7 +96,7 @@
                </StackPane.margin>
                <children>
                   <JFXHamburger fx:id="hamburgerMenu" alignment="CENTER_LEFT" maxWidth="-Infinity" styleClass="hamburger" />
-                  <JFXComboBox fx:id="comboCity" nodeOrientation="RIGHT_TO_LEFT" promptText="ولاية" styleClass="combo-city" />
+                  <JFXComboBox fx:id="comboCities" nodeOrientation="RIGHT_TO_LEFT" promptText="ولاية" styleClass="combo-city" />
                </children>
             </HBox>
             <HBox maxHeight="-Infinity" maxWidth="-Infinity" spacing="5.0" StackPane.alignment="CENTER_RIGHT">
