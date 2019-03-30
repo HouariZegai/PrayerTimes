@@ -20,6 +20,11 @@ JFXComboBox {
     -fx-cursor: hand;
 }
 
+.jfx-combo-box .cell {
+    -fx-background-color: #30425d;
+    -fx-text-fill: #FFF;
+}
+
 /* Start top part */
 
 .hamburger StackPane { /* Menu icon */
@@ -134,7 +139,7 @@ JFXComboBox {
 }
 
 .settings-content-icon {
-    -fx-fill: #FFF
+    -fx-fill: #EEE
 }
 
 .settings-content-icon:hover {
