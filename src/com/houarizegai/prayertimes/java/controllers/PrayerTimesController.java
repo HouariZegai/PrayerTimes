@@ -22,10 +22,16 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
+import java.util.Properties;
 import java.util.ResourceBundle;
 
 public class PrayerTimesController implements Initializable {
@@ -76,10 +82,6 @@ public class PrayerTimesController implements Initializable {
         initDateAndClock();
         initComboCities();
 
-        // Make Tiaret city as default
-        comboCities.getSelectionModel().select("Tiaret");
-        setPrayerTimes(comboCities.getSelectionModel().getSelectedItem());
-
         // For make stage Drageable
         menuBar.setOnMousePressed(event -> {
             xOffset = event.getSceneX();
@@ -96,6 +98,8 @@ public class PrayerTimesController implements Initializable {
         menuBar.setOnMouseReleased(e -> {
             Launcher.stage.setOpacity(1.0f);
         });
+
+        loadSettingsLog();
     }
 
     private void initDateAndClock() {
@@ -170,6 +174,7 @@ public class PrayerTimesController implements Initializable {
 
     @FXML
     private void onClose() {
+        saveSettingsLog();
         Platform.exit();
     }
 
@@ -239,5 +244,56 @@ public class PrayerTimesController implements Initializable {
     }
 
     /* End settings part */
+
+    /* Start settings log */
+
+    private void loadSettingsLog() {
+        ResourceBundle bundle = ResourceBundle.getBundle("com.houarizegai.prayertimes.resources.config.settings");
+
+        // Make Tiaret city as default
+        comboCities.getSelectionModel().select(Integer.parseInt(toUTF(bundle.getString("city"))));
+        setPrayerTimes(comboCities.getSelectionModel().getSelectedItem());
+
+        tglRunAdan.setSelected(Boolean.valueOf(toUTF((bundle.getString("enableAdan")))));
+        comboAdan.getSelectionModel().select(Integer.parseInt(toUTF((bundle.getString("adan")))));
+    }
+
+    private void saveSettingsLog() {
+        Properties prop = new Properties();
+        OutputStream output = null;
+        try {
+            output = new FileOutputStream("src/com/houarizegai/prayertimes/resources/config/settings.properties");
+
+            // Set the properties value
+            prop.setProperty("city", String.valueOf(comboCities.getSelectionModel().getSelectedIndex()));
+            prop.setProperty("enableAdan", String.valueOf(tglRunAdan.isSelected()));
+            prop.setProperty("adan", String.valueOf(comboAdan.getSelectionModel().getSelectedIndex()));
+
+            // Save properties to project root folder
+            prop.store(output, null);
+
+        } catch (IOException io) {
+            io.printStackTrace();
+        } finally {
+            if (output != null) {
+                try {
+                    output.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    private String toUTF(String val) {
+        try {
+            return new String(val.getBytes("ISO-8859-1"), "UTF-8");
+        } catch(Exception ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
+    /* End settings log */
 
 }
