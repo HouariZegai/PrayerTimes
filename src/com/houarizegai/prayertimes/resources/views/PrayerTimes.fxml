@@ -2,8 +2,12 @@
 
 <?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXHamburger?>
+<?import com.jfoenix.controls.JFXToggleButton?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -14,78 +18,121 @@
 
 <BorderPane prefWidth="450.0" stylesheets="@../css/prayer-times.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.houarizegai.prayertimes.java.controllers.PrayerTimesController">
    <center>
-      <VBox alignment="TOP_CENTER" spacing="45.0" stylesheets="@../css/prayer-times.css">
+      <StackPane>
          <children>
-            <GridPane alignment="TOP_RIGHT" hgap="20.0" maxWidth="-Infinity" vgap="10.0" VBox.vgrow="NEVER">
-              <columnConstraints>
-                <ColumnConstraints fillWidth="false" halignment="CENTER" hgrow="NEVER" minWidth="10.0" />
-                <ColumnConstraints fillWidth="false" hgrow="NEVER" minWidth="10.0" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              </rowConstraints>
+            <VBox alignment="TOP_CENTER" spacing="45.0" stylesheets="@../css/prayer-times.css">
                <children>
-                  <Label styleClass="lbl-title" text="التاريخ:" GridPane.columnIndex="1" />
-                  <Label styleClass="lbl-title" text="الساعة:" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <Label fx:id="lblDate" styleClass="lbl-date-time" text="dd/mm/yyyy" />
-                  <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" GridPane.rowIndex="1">
+                  <GridPane alignment="TOP_RIGHT" hgap="20.0" maxWidth="-Infinity" vgap="10.0" VBox.vgrow="NEVER">
+                    <columnConstraints>
+                      <ColumnConstraints fillWidth="false" halignment="CENTER" hgrow="NEVER" minWidth="10.0" />
+                      <ColumnConstraints fillWidth="false" hgrow="NEVER" minWidth="10.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
                      <children>
-                        <Label fx:id="lblTimeH" styleClass="lbl-date-time" text="hh" />
-                        <Label fx:id="lblTimeSeparator" styleClass="lbl-date-time" text=":" />
-                        <Label fx:id="lblTimeM" styleClass="lbl-date-time" text="mm" />
-                        <Label fx:id="lblTimeSeparator2" styleClass="lbl-date-time" text=":" />
-                        <Label fx:id="lblTimeS" styleClass="lbl-date-time" text="ss" />
+                        <Label styleClass="lbl-title" text="التاريخ:" GridPane.columnIndex="1" />
+                        <Label styleClass="lbl-title" text="الساعة:" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Label fx:id="lblDate" styleClass="lbl-date-time" text="dd/mm/yyyy" />
+                        <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" GridPane.rowIndex="1">
+                           <children>
+                              <Label fx:id="lblTimeH" styleClass="lbl-date-time" text="hh" />
+                              <Label fx:id="lblTimeSeparator" styleClass="lbl-date-time" text=":" />
+                              <Label fx:id="lblTimeM" styleClass="lbl-date-time" text="mm" />
+                              <Label fx:id="lblTimeSeparator2" styleClass="lbl-date-time" text=":" />
+                              <Label fx:id="lblTimeS" styleClass="lbl-date-time" text="ss" />
+                           </children>
+                        </HBox>
                      </children>
-                  </HBox>
+                  </GridPane>
+                  <VBox alignment="TOP_CENTER" maxWidth="-Infinity" prefWidth="270.0" spacing="10.0">
+                     <children>
+                        <Label styleClass="lbl-prayer-title" text="أوقات الصلاة" />
+                        <StackPane prefHeight="45.0" styleClass="box-prayer">
+                           <children>
+                              <Label fx:id="lblPrayerFajr" styleClass="lbl-prayer-time" text="hh:mm" StackPane.alignment="CENTER_LEFT" />
+                              <Label styleClass="lbl-prayer-name" text="الفجر" StackPane.alignment="CENTER_RIGHT" />
+                           </children>
+                        </StackPane>
+                        <StackPane prefHeight="45.0" styleClass="box-prayer">
+                           <children>
+                              <Label fx:id="lblPrayerSunrise" styleClass="lbl-prayer-time" text="hh:mm" StackPane.alignment="CENTER_LEFT" />
+                              <Label styleClass="lbl-prayer-name" text="الشروق" StackPane.alignment="CENTER_RIGHT" />
+                           </children>
+                        </StackPane>
+                        <StackPane prefHeight="45.0" styleClass="box-prayer">
+                           <children>
+                              <Label fx:id="lblPrayerDhuhr" styleClass="lbl-prayer-time" text="hh:mm" StackPane.alignment="CENTER_LEFT" />
+                              <Label styleClass="lbl-prayer-name" text="الظهر" StackPane.alignment="CENTER_RIGHT" />
+                           </children>
+                        </StackPane>
+                        <StackPane prefHeight="45.0" styleClass="box-prayer">
+                           <children>
+                              <Label fx:id="lblPrayerAsr" styleClass="lbl-prayer-time" text="hh:mm" StackPane.alignment="CENTER_LEFT" />
+                              <Label styleClass="lbl-prayer-name" text="العصر" StackPane.alignment="CENTER_RIGHT" />
+                           </children>
+                        </StackPane>
+                        <StackPane prefHeight="45.0" styleClass="box-prayer">
+                           <children>
+                              <Label fx:id="lblPrayerMaghrib" styleClass="lbl-prayer-time" text="hh:mm" StackPane.alignment="CENTER_LEFT" />
+                              <Label styleClass="lbl-prayer-name" text="المغرب" StackPane.alignment="CENTER_RIGHT" />
+                           </children>
+                        </StackPane>
+                        <StackPane prefHeight="45.0" styleClass="box-prayer">
+                           <children>
+                              <Label fx:id="lblPrayerIsha" styleClass="lbl-prayer-time" text="hh:mm" StackPane.alignment="CENTER_LEFT" />
+                              <Label styleClass="lbl-prayer-name" text="العشاء" StackPane.alignment="CENTER_RIGHT" />
+                           </children>
+                        </StackPane>
+                     </children>
+                  </VBox>
                </children>
-            </GridPane>
-            <VBox alignment="TOP_CENTER" maxWidth="-Infinity" prefWidth="270.0" spacing="10.0">
-               <children>
-                  <Label styleClass="lbl-prayer-title" text="أوقات الصلاة" />
-                  <StackPane prefHeight="45.0" styleClass="box-prayer">
-                     <children>
-                        <Label fx:id="lblPrayerFajr" styleClass="lbl-prayer-time" text="hh:mm" StackPane.alignment="CENTER_LEFT" />
-                        <Label styleClass="lbl-prayer-name" text="الفجر" StackPane.alignment="CENTER_RIGHT" />
-                     </children>
-                  </StackPane>
-                  <StackPane prefHeight="45.0" styleClass="box-prayer">
-                     <children>
-                        <Label fx:id="lblPrayerSunrise" styleClass="lbl-prayer-time" text="hh:mm" StackPane.alignment="CENTER_LEFT" />
-                        <Label styleClass="lbl-prayer-name" text="الشروق" StackPane.alignment="CENTER_RIGHT" />
-                     </children>
-                  </StackPane>
-                  <StackPane prefHeight="45.0" styleClass="box-prayer">
-                     <children>
-                        <Label fx:id="lblPrayerDhuhr" styleClass="lbl-prayer-time" text="hh:mm" StackPane.alignment="CENTER_LEFT" />
-                        <Label styleClass="lbl-prayer-name" text="الظهر" StackPane.alignment="CENTER_RIGHT" />
-                     </children>
-                  </StackPane>
-                  <StackPane prefHeight="45.0" styleClass="box-prayer">
-                     <children>
-                        <Label fx:id="lblPrayerAsr" styleClass="lbl-prayer-time" text="hh:mm" StackPane.alignment="CENTER_LEFT" />
-                        <Label styleClass="lbl-prayer-name" text="العصر" StackPane.alignment="CENTER_RIGHT" />
-                     </children>
-                  </StackPane>
-                  <StackPane prefHeight="45.0" styleClass="box-prayer">
-                     <children>
-                        <Label fx:id="lblPrayerMaghrib" styleClass="lbl-prayer-time" text="hh:mm" StackPane.alignment="CENTER_LEFT" />
-                        <Label styleClass="lbl-prayer-name" text="المغرب" StackPane.alignment="CENTER_RIGHT" />
-                     </children>
-                  </StackPane>
-                  <StackPane prefHeight="45.0" styleClass="box-prayer">
-                     <children>
-                        <Label fx:id="lblPrayerIsha" styleClass="lbl-prayer-time" text="hh:mm" StackPane.alignment="CENTER_LEFT" />
-                        <Label styleClass="lbl-prayer-name" text="العشاء" StackPane.alignment="CENTER_RIGHT" />
-                     </children>
-                  </StackPane>
-               </children>
+               <padding>
+                  <Insets bottom="30.0" top="60.0" />
+               </padding>
             </VBox>
+            <AnchorPane fx:id="paneSettings" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="350.0" prefWidth="350.0" styleClass="settings">
+               <children>
+                  <StackPane layoutX="175.0" layoutY="6.0" prefHeight="70.0" styleClass="settings-header" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <Label styleClass="settings-header-title" text="الإعدادات" />
+                        <Label onMouseClicked="#onCloseMenu" styleClass="btn-close" StackPane.alignment="TOP_RIGHT">
+                           <StackPane.margin>
+                              <Insets right="5.0" top="5.0" />
+                           </StackPane.margin>
+                        </Label>
+                     </children>
+                  </StackPane>
+                  <Label layoutX="280.0" layoutY="84.0" styleClass="settings-content-title" text="الأذان" />
+                  <GridPane hgap="10.0" layoutX="17.0" layoutY="126.0">
+                     <columnConstraints>
+                        <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="80.0" />
+                        <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" />
+                        <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" minWidth="10.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                     <children>
+                        <Label styleClass="settings-content-txt" text="تشغيل" GridPane.columnIndex="2" />
+                        <Label styleClass="settings-content-txt" text="المؤذن" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                        <JFXToggleButton fx:id="tglRunAdan" graphicTextGap="0.0" nodeOrientation="RIGHT_TO_LEFT" styleClass="settings-content-tgl" text=" " GridPane.columnIndex="1">
+                           <padding>
+                              <Insets right="-50.0" />
+                           </padding></JFXToggleButton>
+                        <JFXComboBox fx:id="comboAdan" nodeOrientation="RIGHT_TO_LEFT" promptText="إختر" styleClass="settings-content-combo" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <FontAwesomeIconView fx:id="iconPlayAdan" glyphName="PLAY" size="20" styleClass="settings-content-icon" GridPane.rowIndex="1" />
+                     </children>
+                  </GridPane>
+               </children>
+               <effect>
+                  <DropShadow color="#00000055" />
+               </effect>
+            </AnchorPane>
          </children>
-         <padding>
-            <Insets bottom="30.0" top="60.0" />
-         </padding>
-      </VBox>
+      </StackPane>
    </center>
    <top>
       <StackPane fx:id="menuBar" styleClass="menu-bar" BorderPane.alignment="CENTER">

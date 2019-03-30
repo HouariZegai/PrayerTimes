@@ -1,13 +1,23 @@
 * {
-    -fx-font-family: tahoma;
+    -fx-font-family: Tahoma;
+    -primary-color: #33485d;
+    -second-color: #f3970c;
 }
 
 .root {
-	-fx-background-color: #33485d
+	-fx-background-color: -primary-color
 }
 
 .menu-bar {
 	-fx-background-color: #30425d
+}
+
+JFXComboBox {
+    -fx-prompt-text-fill: #CCC;
+    -jfx-unfocus-color: #DDD;
+    -jfx-focus-color: #EEE;
+    -fx-text-fill: #FFF;
+    -fx-cursor: hand;
 }
 
 /* Start top part */
@@ -20,11 +30,6 @@
 .combo-city {
 	-fx-pref-width: 180px;
 	-fx-pref-height: 40px;
-	-fx-prompt-text-fill: #EEE;
-	-jfx-unfocus-color: #DDD;
-	-jfx-focus-color: #FFF;
-	-fx-text-fill: #FFF;
-	-fx-cursor: hand;
 	-fx-font-size: 18px;
 }
 
@@ -58,7 +63,7 @@
 
 .lbl-title {
     -fx-font-size: 20px;
-    -fx-text-fill: #f3970c;
+    -fx-text-fill: -second-color;
 }
 
 .lbl-date-time {
@@ -69,7 +74,7 @@
 .lbl-prayer-title {
 	-fx-font-size: 28px;
 	-fx-font-weight: bold;
-	-fx-text-fill: #f3970c;
+	-fx-text-fill: -second-color;
 }
 
 .box-prayer {
@@ -80,7 +85,7 @@
 
 .lbl-prayer-name {
 	-fx-font-size: 26px;
-	-fx-text-fill: #f3970c;
+	-fx-text-fill: -second-color;
 }
 
 .lbl-prayer-time {
@@ -89,3 +94,52 @@
 }
 
 /* End content part */
+
+/* Start settings part */
+
+.settings {
+    -fx-background-radius: 5;
+    -fx-background-color: -primary-color;
+}
+
+.settings-header {
+    -fx-background-radius: 5 5 0 0;
+    -fx-background-color: -second-color;
+}
+
+.settings-header-title {
+    -fx-font-size: 28px;
+    -fx-text-fill: #FFF;
+}
+
+.settings-content-title {
+    -fx-text-fill: -second-color;
+    -fx-font-size: 22px;
+}
+
+.settings-content-txt {
+    -fx-text-fill: #FFF;
+    -fx-font-size: 20px;
+}
+
+.settings-content-tgl {
+    -jfx-untoggle-color: #DDD;
+    -jfx-toggle-color: -second-color;
+}
+
+.settings-content-combo {
+    -fx-pref-width: 150px;
+    -fx-pref-height: 30px;
+    -fx-font-size: 18px;
+}
+
+.settings-content-icon {
+    -fx-fill: #FFF
+}
+
+.settings-content-icon:hover {
+    -fx-fill: -second-color;
+    -fx-cursor: hand
+}
+
+/* End settings part */
