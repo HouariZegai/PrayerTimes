@@ -1,7 +1,10 @@
 package com.houarizegai.prayertimes.java.controllers;
 
+import com.houarizegai.prayertimes.java.models.PrayerTimes;
+import com.houarizegai.prayertimes.java.models.PrayerTimesBuilder;
 import com.houarizegai.prayertimes.java.utils.Constants;
 import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.controls.JFXListView;
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
@@ -10,11 +13,13 @@ import com.mashape.unirest.http.exceptions.UnirestException;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
+import javafx.scene.transform.Scale;
 import javafx.util.Duration;
 import org.json.JSONObject;
 
@@ -28,70 +33,116 @@ import java.util.ResourceBundle;
 public class PrayerTimesController implements Initializable {
 
     @FXML
-    private Label lblDate, lblTime;
+    private Label lblDate;
 
     @FXML
-    private JFXComboBox<String> comboWilaya;
+    private Label lblTimeH;
 
     @FXML
-    private JFXListView<StackPane> listTimes;
+    private Label lblTimeSeparator;
+
+    @FXML
+    private Label lblTimeM;
+
+    @FXML
+    private Label lblTimeSeparator2;
+
+    @FXML
+    private Label lblTimeS;
+
+    @FXML
+    private Label lblPrayerFajr;
+
+    @FXML
+    private Label lblPrayerSunrise;
+
+    @FXML
+    private Label lblPrayerDhuhr;
+
+    @FXML
+    private Label lblPrayerAsr;
+
+    @FXML
+    private Label lblPrayerMaghrib;
+
+    @FXML
+    private Label lblPrayerIsha;
+
+    @FXML
+    private JFXHamburger hamburgerMenu;
+
+    @FXML
+    private JFXComboBox<String> comboCity;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         initDateAndClock();
         initComboCities();
 
-        // Initialize List of Prayer Times
-        listTimes.getItems().clear();
-        listTimes.getItems().add(getItemList("الفجر", ""));
-        listTimes.getItems().add(getItemList("الشروق", ""));
-        listTimes.getItems().add(getItemList("الظهر", ""));
-        listTimes.getItems().add(getItemList("العصر", ""));
-        listTimes.getItems().add(getItemList("المغرب", ""));
-        listTimes.getItems().add(getItemList("العشاء", ""));
-
         // Make Tiaret city as default
-        comboWilaya.getSelectionModel().select("Tiaret");
-        getJsonPrayerTimes(comboWilaya.getSelectionModel().getSelectedItem());
+        comboCity.getSelectionModel().select("Tiaret");
+        getJsonPrayerTimes(comboCity.getSelectionModel().getSelectedItem());
+    }
+
+    @FXML
+    private void onClose() {
+        Platform.exit();
+    }
+
+    @FXML
+    private void onHide() {
+
     }
 
     private void initDateAndClock() {
-        // initialize Clock Showing in UI of Prayer times
-        Timeline clock = new Timeline(new KeyFrame(Duration.ZERO, e -> {
+        /* initialize clock (date & time) of prayer times */
+        KeyFrame clockKeyFrame = new KeyFrame(Duration.ZERO, e -> {
             Date date = new Date();
             DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
             lblDate.setText(dateFormat.format(date));
 
             dateFormat = new SimpleDateFormat("HH:mm:ss");
-            lblTime.setText(dateFormat.format(date));
-        }),
-                new KeyFrame(Duration.seconds(1))
-        );
+            String[] time = dateFormat.format(date).split(":");
+            lblTimeS.setText(time[2]);
+            lblTimeM.setText(time[1]);
+            lblTimeH.setText(time[0]);
+
+            // If new day change the prayer times
+            if(dateFormat.equals("00:00:00") && comboCity.getSelectionModel() != null) {
+                getJsonPrayerTimes(comboCity.getSelectionModel().getSelectedItem());
+            }
+        });
+
+        Timeline clock = new Timeline(clockKeyFrame, new KeyFrame(Duration.seconds(1)));
         clock.setCycleCount(Animation.INDEFINITE);
         clock.play();
+
+        /* Show and hide animation for separetor of time */
+        KeyFrame clockSeparatorKeyFrame = new KeyFrame(Duration.ZERO, e -> {
+            if(lblTimeSeparator.isVisible()) {
+                lblTimeSeparator.setVisible(false);
+                lblTimeSeparator2.setVisible(false);
+            } else {
+                lblTimeSeparator.setVisible(true);
+                lblTimeSeparator2.setVisible(true);
+            }
+        });
+
+        Timeline clockSeparator = new Timeline(clockSeparatorKeyFrame, new KeyFrame(Duration.millis(500)));
+        clockSeparator.setCycleCount(Animation.INDEFINITE);
+        clockSeparator.play();
+
     }
 
     private void initComboCities() {
         // Add cities names to ComboBox
-        comboWilaya.getItems().clear();
-        comboWilaya.getItems().addAll(Constants.DZ_CITIES);
+        comboCity.getItems().clear();
+        comboCity.getItems().addAll(Constants.DZ_CITIES);
 
         // Add Event to ComboBox
-        comboWilaya.setOnAction(e -> {
-            getJsonPrayerTimes(comboWilaya.getSelectionModel().getSelectedItem());
+        comboCity.setOnAction(e -> {
+            getJsonPrayerTimes(comboCity.getSelectionModel().getSelectedItem());
         });
-    }
-
-    private StackPane getItemList(String prayerName, String prayerTime) { // create prayer with time
-        StackPane prayerItem = null;
-        try {
-            prayerItem = FXMLLoader.load(getClass().getResource("/com/houarizegai/prayertimes/resources/views/PrayerItem.fxml"));
-            ((Label) prayerItem.getChildren().get(0)).setText(prayerName);
-            ((Label) prayerItem.getChildren().get(1)).setText(prayerTime);
-        } catch (IOException ioe) {
-            ioe.printStackTrace();
-        }
-        return prayerItem;
     }
 
     private void getJsonPrayerTimes(String city) { // Get prayer times from WebService
@@ -112,33 +163,49 @@ public class PrayerTimesController implements Initializable {
             JSONObject jsonRoot = new JSONObject(jsonResponse.getBody().toString());
 
             if(!jsonRoot.has("results")) {
-                System.out.println("Not Found !");
-                // Make Empty prayer times
-                for(int i = 0; i < listTimes.getItems().size(); i++) {
-                    ((Label) listTimes.getItems().get(i).getChildren().get(1)).setText("--:--");
-                }
-
+                System.out.println("City not found !");
+                /* Make Empty prayer times */
+                PrayerTimes prayerTimes = new PrayerTimesBuilder()
+                        .setFajr("hh:mm")
+                        .setSunrise("hh:mm")
+                        .setDhuhr("hh:mm")
+                        .setAsr("hh:mm")
+                        .setMaghrib("hh:mm")
+                        .setIsha("hh:mm")
+                        .build();
+                setPrayerTimes(prayerTimes);
                 return;
             }
 
-            JSONObject jsonDate =
-                    jsonRoot.getJSONObject("results")
+            JSONObject jsonDate = jsonRoot.getJSONObject("results")
                     .getJSONArray("datetime")
                     .getJSONObject(0)
                     .getJSONObject("times");
 
-            // Edit Times of prayer in UI
-            ((Label) listTimes.getItems().get(0).getChildren().get(1)).setText(jsonDate.getString("Fajr"));
-            ((Label) listTimes.getItems().get(1).getChildren().get(1)).setText(jsonDate.getString("Sunrise"));
-            ((Label) listTimes.getItems().get(2).getChildren().get(1)).setText(jsonDate.getString("Dhuhr"));
-            ((Label) listTimes.getItems().get(3).getChildren().get(1)).setText(jsonDate.getString("Asr"));
-            ((Label) listTimes.getItems().get(4).getChildren().get(1)).setText(jsonDate.getString("Maghrib"));
-            ((Label) listTimes.getItems().get(5).getChildren().get(1)).setText(jsonDate.getString("Isha"));
+            /* Edit Times of prayer in UI */
+            PrayerTimes prayerTimes = new PrayerTimesBuilder()
+                    .setFajr(jsonDate.getString("Fajr"))
+                    .setSunrise(jsonDate.getString("Sunrise"))
+                    .setDhuhr(jsonDate.getString("Dhuhr"))
+                    .setAsr(jsonDate.getString("Asr"))
+                    .setMaghrib(jsonDate.getString("Maghrib"))
+                    .setIsha(jsonDate.getString("Isha"))
+                    .build();
+            setPrayerTimes(prayerTimes);
 
         } catch (UnirestException e) {
             e.printStackTrace();
         }
 
+    }
+
+    private void setPrayerTimes(PrayerTimes prayerTimes) {
+        lblPrayerFajr.setText(prayerTimes.getFajr());
+        lblPrayerSunrise.setText(prayerTimes.getSunrise());
+        lblPrayerDhuhr.setText(prayerTimes.getDhuhr());
+        lblPrayerAsr.setText(prayerTimes.getAsr());
+        lblPrayerMaghrib.setText(prayerTimes.getMaghrib());
+        lblPrayerIsha.setText(prayerTimes.getIsha());
     }
 
 }
