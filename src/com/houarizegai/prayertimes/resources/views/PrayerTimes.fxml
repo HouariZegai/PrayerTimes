@@ -7,6 +7,8 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -48,7 +50,16 @@
                   </GridPane>
                   <VBox alignment="TOP_CENTER" maxWidth="-Infinity" prefWidth="270.0" spacing="10.0">
                      <children>
-                        <Label styleClass="lbl-prayer-title" text="أوقات الصلاة" />
+                        <HBox alignment="CENTER" spacing="10.0">
+                           <children>
+                              <ImageView fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/icon-app-64px.png" />
+                                 </image>
+                              </ImageView>
+                              <Label styleClass="lbl-prayer-title" text="أوقات الصلاة" />
+                           </children>
+                        </HBox>
                         <StackPane prefHeight="45.0" styleClass="box-prayer">
                            <children>
                               <Label fx:id="lblPrayerFajr" styleClass="lbl-prayer-time" text="hh:mm" StackPane.alignment="CENTER_LEFT" />
