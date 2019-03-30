@@ -1,7 +1,12 @@
+@font-face {
+    font-family: 'Alameen-Demibold';
+    src: url('../fonts/Alameen.ttf');
+}
+
 * {
-    -fx-font-family: Tahoma;
     -primary-color: #33485d;
     -second-color: #f3970c;
+    -fx-font-family: Alameen-Demibold;
 }
 
 .root {
@@ -72,12 +77,12 @@ JFXComboBox {
 }
 
 .lbl-date-time {
-	-fx-font-size: 30px;
+	-fx-font-size: 32px;
 	-fx-text-fill: #FFF;
 }
 
 .lbl-prayer-title {
-	-fx-font-size: 28px;
+	-fx-font-size: 30px;
 	-fx-font-weight: bold;
 	-fx-text-fill: -second-color;
 }
@@ -133,9 +138,9 @@ JFXComboBox {
 }
 
 .settings-content-combo {
-    -fx-pref-width: 150px;
+    -fx-pref-width: 120px;
     -fx-pref-height: 30px;
-    -fx-font-size: 18px;
+    -fx-font-size: 20px;
 }
 
 .settings-content-icon {

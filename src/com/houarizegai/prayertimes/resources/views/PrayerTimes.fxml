@@ -92,7 +92,7 @@
                   <Insets bottom="30.0" top="60.0" />
                </padding>
             </VBox>
-            <AnchorPane fx:id="paneSettings" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="350.0" prefWidth="350.0" styleClass="settings">
+            <AnchorPane fx:id="paneSettings" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="350.0" prefWidth="350.0" styleClass="settings" visible="false">
                <children>
                   <StackPane layoutX="175.0" layoutY="6.0" prefHeight="70.0" styleClass="settings-header" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
@@ -105,7 +105,7 @@
                      </children>
                   </StackPane>
                   <Label layoutX="280.0" layoutY="84.0" styleClass="settings-content-title" text="الأذان" />
-                  <GridPane hgap="10.0" layoutX="17.0" layoutY="126.0">
+                  <GridPane hgap="10.0" layoutX="44.0" layoutY="126.0">
                      <columnConstraints>
                         <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="80.0" />
                         <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" />
@@ -113,7 +113,7 @@
                      </columnConstraints>
                      <rowConstraints>
                         <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="SOMETIMES" />
                      </rowConstraints>
                      <children>
                         <Label styleClass="settings-content-txt" text="تشغيل" GridPane.columnIndex="2" />

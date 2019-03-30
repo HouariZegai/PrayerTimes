@@ -102,7 +102,7 @@ public class PrayerTimesController implements Initializable {
         /* initialize clock (date & time) of prayer times */
         KeyFrame clockKeyFrame = new KeyFrame(Duration.ZERO, e -> {
             Date date = new Date();
-            DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
             lblDate.setText(dateFormat.format(date));
 
             dateFormat = new SimpleDateFormat("HH:mm:ss");
@@ -181,8 +181,6 @@ public class PrayerTimesController implements Initializable {
     /* Start settings part */
 
     private void initMenu() { // Init settings
-        paneSettings.setVisible(false);
-
         /* Init show/hide menu */
         hamburgerTransition = new HamburgerBasicCloseTransition(hamburgerMenu);
         hamburgerTransition.setRate(-1);
