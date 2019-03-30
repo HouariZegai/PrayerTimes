@@ -2,15 +2,89 @@
     -fx-font-family: tahoma;
 }
 
-.lbl-name {
-    -fx-font-size: 20px
+.root {
+	-fx-background-color: #33485d
 }
 
-.lbl-value {
-    -fx-font-size: 20px
+.menu-bar {
+	-fx-background-color: #30425d
 }
 
-.check-value {
-    -fx-font-size: 15px;
+/* Start top part */
+
+.hamburger StackPane { /* Menu icon */
+    -fx-background-color: #FFF;
+    -fx-cursor: hand
+}
+
+.combo-city {
+	-fx-pref-width: 180px;
+	-fx-pref-height: 40px;
+	-fx-prompt-text-fill: #EEE;
+	-jfx-unfocus-color: #DDD;
+	-jfx-focus-color: #FFF;
+	-fx-cursor: hand;
+	-fx-font-size: 18px;
+}
+
+.btn-close{ /* Close button */
+    -fx-pref-width: 18px;
+    -fx-pref-height: 18px;
+    -fx-background-color: #FC5653;
+    -fx-background-radius: 100%;
+}
+.btn-close:hover{
     -fx-cursor: hand;
+    -fx-background-color: red;
+    -fx-background-radius: 100%;
 }
+
+.btn-min{ /* Hide button */
+    -fx-pref-width: 18px;
+    -fx-pref-height: 18px;
+    -fx-background-color: #29CC41;
+    -fx-background-radius: 100%;
+}
+.btn-min:hover{
+    -fx-cursor: hand;
+    -fx-background-color: green;
+    -fx-background-radius: 100%;
+}
+
+/* End top part */
+
+/* Start content part */
+
+.lbl-title {
+    -fx-font-size: 20px;
+    -fx-text-fill: #f3970c;
+}
+
+.lbl-date-time {
+	-fx-font-size: 30px;
+	-fx-text-fill: #FFF;
+}
+
+.lbl-prayer-title {
+	-fx-font-size: 28px;
+	-fx-font-weight: bold;
+	-fx-text-fill: #f3970c;
+}
+
+.box-prayer {
+	-fx-background-color: rgba(255, 255, 255, 0.1);
+	-fx-background-radius: 5;
+	-fx-padding: 5;
+}
+
+.lbl-prayer-name {
+	-fx-font-size: 26px;
+	-fx-text-fill: #f3970c;
+}
+
+.lbl-prayer-time {
+	-fx-font-size: 26px;
+	-fx-text-fill: #FFF;
+}
+
+/* End content part */
