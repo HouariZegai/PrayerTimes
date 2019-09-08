@@ -20,17 +20,21 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
 
-import java.io.FileInputStream;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.net.JarURLConnection;
 import java.net.URL;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Locale;
 import java.util.Properties;
 import java.util.ResourceBundle;
 
@@ -69,6 +73,19 @@ public class PrayerTimesController implements Initializable {
     private FontAwesomeIconView iconPlayAdan;
 
     HamburgerBasicCloseTransition hamburgerTransition;
+
+    private MediaPlayer mediaPlayer; // Adhan player
+
+    private final static String ADHAN_PATH;
+
+    static {
+        // Get Path of Project
+        Path currentRelativePath = Paths.get("");
+        // convert the path to absolute
+        String currentAbsolutePath = currentRelativePath.toAbsolutePath().toString();
+
+        ADHAN_PATH = currentAbsolutePath + "\\src\\com\\houarizegai\\prayertimes\\resources\\adan\\";
+    }
 
     /* End settings part */
 
@@ -202,15 +219,22 @@ public class PrayerTimesController implements Initializable {
 
         // Init combo Adan
         comboAdan.getItems().addAll("أذان 1", "أذان 2", "أذان 3", "أذان 4", "أذان 5");
+        comboAdan.setOnAction(e -> {
+            mediaPlayer.pause();
+            iconPlayAdan.setGlyphName("PLAY");
+        });
 
         // Init play/pause test adan
         iconPlayAdan.setOnMouseClicked(e -> {
             if (iconPlayAdan.getGlyphName().equals("PLAY")) {
+                Media hit = new Media(new File(ADHAN_PATH + "adan" + (comboAdan.getSelectionModel().getSelectedIndex() + 1) + ".mp3").toURI().toString());
+                mediaPlayer = new MediaPlayer(hit);
+                mediaPlayer.play();
+
                 iconPlayAdan.setGlyphName("PAUSE");
-
             } else {
+                mediaPlayer.pause();
                 iconPlayAdan.setGlyphName("PLAY");
-
             }
         });
     }
