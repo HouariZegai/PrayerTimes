@@ -24,7 +24,9 @@ Desktop app for calculating Muslim prayer times 🕌 and setting an alarm (Adhan
 ### Screenshoot
 Prayer times           | Settings
 :---------------------:|:------------------:
-![prayer times - screenshoot](screenshoots/v1/prayerTimes.PNG) | ![prayer times - screenshoot](screenshoots/v1/settings.PNG)
+![prayer times - screenshoot](screenshoots/v1/prayer_times.PNG) | ![prayer times - screenshoot](screenshoots/v1/settings.PNG)
+Adhan (Alarm)           |
+![adhan alarm - screenshoot](screenshoots/v1/adhan_alarm.PNG) |
 
 ### Installation
 1. Download the repository files (project) from the download section or clone this project by typing in the bash the following command:
@@ -37,7 +39,7 @@ Prayer times           | Settings
 If you want to contribute to this project and make it better with new ideas, your pull request is very welcomed.
 If you find any issue just put it in the repository issue section, thank you.
 
-### Follow me
+### Find me at
 [LinkedIn](https://www.linkedin.com/in/houarizegai) |
 [Facebook](https://www.facebook.com/HZegai) |
 [Youtube](https://www.youtube.com/HouariZegai) |
