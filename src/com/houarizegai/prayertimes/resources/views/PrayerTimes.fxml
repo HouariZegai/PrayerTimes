@@ -3,6 +3,7 @@
 <?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXHamburger?>
 <?import com.jfoenix.controls.JFXToggleButton?>
+<?import de.jensd.fx.glyphs.emojione.EmojiOneView?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
@@ -17,6 +18,8 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.text.TextFlow?>
 
 <BorderPane prefWidth="450.0" stylesheets="@../css/prayer-times.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.houarizegai.prayertimes.java.controllers.PrayerTimesController">
    <center>
@@ -103,7 +106,7 @@
                   <Insets bottom="30.0" top="60.0" />
                </padding>
             </VBox>
-            <AnchorPane fx:id="paneSettings" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="350.0" prefWidth="350.0" styleClass="settings" visible="false">
+            <AnchorPane fx:id="settingsView" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="350.0" prefWidth="350.0" styleClass="settings" visible="false">
                <children>
                   <StackPane layoutX="175.0" layoutY="6.0" prefHeight="70.0" styleClass="settings-header" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
@@ -129,12 +132,12 @@
                      <children>
                         <Label styleClass="settings-content-txt" text="تشغيل" GridPane.columnIndex="2" />
                         <Label styleClass="settings-content-txt" text="المؤذن" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                        <JFXToggleButton fx:id="tglRunAdan" graphicTextGap="0.0" nodeOrientation="RIGHT_TO_LEFT" styleClass="settings-content-tgl" text=" " GridPane.columnIndex="1">
+                        <JFXToggleButton fx:id="tglRunAdhan" graphicTextGap="0.0" nodeOrientation="RIGHT_TO_LEFT" styleClass="settings-content-tgl" text=" " GridPane.columnIndex="1">
                            <padding>
                               <Insets right="-50.0" />
                            </padding></JFXToggleButton>
-                        <JFXComboBox fx:id="comboAdan" nodeOrientation="RIGHT_TO_LEFT" promptText="إختر" styleClass="settings-content-combo" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <FontAwesomeIconView fx:id="iconPlayAdan" glyphName="PLAY" size="20" styleClass="settings-content-icon" GridPane.rowIndex="1" />
+                        <JFXComboBox fx:id="comboAdhan" nodeOrientation="RIGHT_TO_LEFT" promptText="إختر" styleClass="settings-content-combo" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <FontAwesomeIconView fx:id="iconPlayAdhan" glyphName="PLAY" size="20" styleClass="settings-content-icon" GridPane.rowIndex="1" />
                      </children>
                   </GridPane>
                </children>
@@ -142,6 +145,40 @@
                   <DropShadow color="#00000055" />
                </effect>
             </AnchorPane>
+            <StackPane fx:id="alarmView" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="200.0" prefWidth="300.0" styleClass="adhan-container" visible="false">
+               <children>
+                  <Label onMouseClicked="#onCloseAlarm" styleClass="btn-close" StackPane.alignment="TOP_RIGHT">
+                     <StackPane.margin>
+                        <Insets />
+                     </StackPane.margin>
+                  </Label>
+                  <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" spacing="10.0">
+                     <children>
+                        <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" spacing="5.0">
+                           <children>
+                              <Label styleClass="adhan-title" text="الأذان" />
+                              <EmojiOneView fill="WHITE" glyphName="ALARM_CLOCK" size="35" />
+                           </children>
+                        </HBox>
+                        <TextFlow maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="100.0" prefWidth="240.0" textAlignment="CENTER">
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="adhan-desc" text="حان الأن موعد صلاة " textAlignment="CENTER" wrappingWidth="253.1328125" />
+                              <Text fx:id="txtAlarmPrayer" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: -primary-color;" styleClass="adhan-desc" text="العصر" textAlignment="CENTER" wrappingWidth="253.1328125" />
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="adhan-desc" text="، حسب توقيت " textAlignment="CENTER" wrappingWidth="253.1328125" />
+                              <Text fx:id="txtAlarmCity" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: -primary-color;" styleClass="adhan-desc" text="Tiaret" textAlignment="CENTER" wrappingWidth="253.1328125" />
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="adhan-desc" text=" وضواحيها" textAlignment="CENTER" wrappingWidth="253.1328125" />
+                           </children>
+                        </TextFlow>
+                     </children>
+                  </VBox>
+               </children>
+               <StackPane.margin>
+                  <Insets />
+               </StackPane.margin>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </StackPane>
          </children>
       </StackPane>
    </center>

@@ -6,6 +6,7 @@
 * {
     -primary-color: #33485d;
     -second-color: #f3970c;
+    -success-color: #29CC41;
     -fx-font-family: Alameen-Demibold;
 }
 
@@ -153,3 +154,22 @@ JFXComboBox {
 }
 
 /* End settings part */
+
+/* Start adhan part */
+
+.adhan-container {
+    -fx-background-radius: 5 5 0 0;
+    -fx-background-color: -success-color;
+}
+
+.adhan-title {
+    -fx-font-size: 35px;
+    -fx-text-fill: #EEE
+}
+
+.adhan-desc {
+    -fx-font-size: 24px;
+    -fx-fill: #EEE
+}
+
+/* End adhan part */

@@ -2,6 +2,8 @@ package com.houarizegai.prayertimes.java.controllers;
 
 import com.houarizegai.prayertimes.java.Launcher;
 import com.houarizegai.prayertimes.java.models.PrayerTimes;
+import com.houarizegai.prayertimes.java.models.PrayerTimesBuilder;
+import com.houarizegai.prayertimes.java.utils.Adhan;
 import com.houarizegai.prayertimes.java.utils.Constants;
 import com.houarizegai.prayertimes.java.utils.WebService;
 import com.jfoenix.controls.JFXComboBox;
@@ -16,12 +18,14 @@ import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.scene.text.Text;
 import javafx.util.Duration;
 
 import java.io.File;
@@ -58,34 +62,31 @@ public class PrayerTimesController implements Initializable {
     @FXML
     private Label lblPrayerFajr, lblPrayerSunrise, lblPrayerDhuhr, lblPrayerAsr, lblPrayerMaghrib, lblPrayerIsha;
 
+    /* Start adhan part */
+
+    @FXML
+    private StackPane alarmView;
+
+    @FXML
+    private Text txtAlarmPrayer, txtAlarmCity;
+
+    /* End adhan part */
+
     /* Start settings part */
 
     @FXML
-    private AnchorPane paneSettings;
+    private AnchorPane settingsView;
 
     @FXML
-    private JFXToggleButton tglRunAdan;
+    private JFXToggleButton tglRunAdhan;
 
     @FXML
-    private JFXComboBox<String> comboAdan;
+    private JFXComboBox<String> comboAdhan;
 
     @FXML
-    private FontAwesomeIconView iconPlayAdan;
+    private FontAwesomeIconView iconPlayAdhan;
 
     HamburgerBasicCloseTransition hamburgerTransition;
-
-    private MediaPlayer mediaPlayer; // Adhan player
-
-    private final static String ADHAN_PATH;
-
-    static {
-        // Get Path of Project
-        Path currentRelativePath = Paths.get("");
-        // convert the path to absolute
-        String currentAbsolutePath = currentRelativePath.toAbsolutePath().toString();
-
-        ADHAN_PATH = currentAbsolutePath + "\\src\\com\\houarizegai\\prayertimes\\resources\\adan\\";
-    }
 
     /* End settings part */
 
@@ -98,8 +99,10 @@ public class PrayerTimesController implements Initializable {
         initMenu();
         initDateAndClock();
         initComboCities();
+        loadSettingsLog(); // load saved app stat
+        initAdhan();
 
-        // For make stage Drageable
+        // make stage drageable
         menuBar.setOnMousePressed(event -> {
             xOffset = event.getSceneX();
             yOffset = event.getSceneY();
@@ -116,7 +119,24 @@ public class PrayerTimesController implements Initializable {
             Launcher.stage.setOpacity(1.0f);
         });
 
-        loadSettingsLog();
+    }
+
+    // Just for testing: change prayer times
+    private void localTestPrayer() {
+        PrayerTimes prayerTimes = new PrayerTimesBuilder()
+                .setFajr("00:00")
+                .setDhuhr("18:35")
+                .setAsr("18:24")
+                .setMaghrib("18:42")
+                .setIsha("18:43")
+                .build();
+
+        lblPrayerFajr.setText(prayerTimes.getFajr());
+        lblPrayerSunrise.setText(prayerTimes.getSunrise());
+        lblPrayerDhuhr.setText(prayerTimes.getDhuhr());
+        lblPrayerAsr.setText(prayerTimes.getAsr());
+        lblPrayerMaghrib.setText(prayerTimes.getMaghrib());
+        lblPrayerIsha.setText(prayerTimes.getIsha());
     }
 
     private void initDateAndClock() {
@@ -136,6 +156,8 @@ public class PrayerTimesController implements Initializable {
             if (dateFormat.equals("00:00:00") && comboCities.getSelectionModel() != null) {
                 setPrayerTimes(comboCities.getSelectionModel().getSelectedItem());
             }
+
+            checkAdhanTime();
         });
 
         Timeline clock = new Timeline(clockKeyFrame, new KeyFrame(Duration.seconds(1)));
@@ -170,6 +192,10 @@ public class PrayerTimesController implements Initializable {
         });
     }
 
+    private void initAdhan() {
+        Adhan.setAdhan("adan" + (comboAdhan.getSelectionModel().getSelectedIndex() + 1));
+    }
+
     private void setPrayerTimes(String city) {
         city = city // format City
                 .replaceAll(" ", "-")
@@ -200,6 +226,40 @@ public class PrayerTimesController implements Initializable {
         Launcher.stage.setIconified(true);
     }
 
+    /* Start alarm (adhan) part */
+
+    private void checkAdhanTime() {
+        // Check prayer times with actual time
+        String timeNow = lblTimeH.getText() + ":" + lblTimeM.getText();
+        System.out.println("time now: " + timeNow);
+        checkTimeWithPrayer(timeNow, lblPrayerFajr, "الفجر");
+        checkTimeWithPrayer(timeNow, lblPrayerDhuhr, "الظهر");
+        checkTimeWithPrayer(timeNow, lblPrayerAsr, "العصر");
+        checkTimeWithPrayer(timeNow, lblPrayerMaghrib, "المغرب");
+        checkTimeWithPrayer(timeNow, lblPrayerIsha, "العشاء");
+    }
+
+    private void checkTimeWithPrayer(String time, Label lblPrayerTime, String prayerName) { // Check if it's the time of prayer
+        if(time.equals(lblPrayerTime.getText())) {
+            if(Adhan.canPlay() && !Adhan.isPlaying() && tglRunAdhan.isSelected()) {
+                Adhan.setCanPlay(false);
+                txtAlarmCity.setText(comboCities.getSelectionModel().getSelectedItem());
+                txtAlarmPrayer.setText(prayerName);
+                setShowView(true, alarmView);
+                Adhan.play();
+            }
+        }
+    }
+
+    @FXML
+    public void onCloseAlarm() {
+        setShowView(false, alarmView);
+        Adhan.pause();
+        Adhan.launchPeriodStop();
+    }
+
+    /* End alarm (adhan) part */
+
     /* Start settings part */
 
     private void initMenu() { // Init settings
@@ -209,48 +269,48 @@ public class PrayerTimesController implements Initializable {
         hamburgerMenu.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
             if (hamburgerTransition.getRate() == -1) {
                 hamburgerTransition.setRate(1);
-                setShowSettings(true);
+                setShowView(true, settingsView);
             } else {
                 hamburgerTransition.setRate(-1);
-                setShowSettings(false);
+                setShowView(false, settingsView);
+                Adhan.pause();
             }
             hamburgerTransition.play();
         });
 
         // Init combo Adan
-        comboAdan.getItems().addAll("أذان 1", "أذان 2", "أذان 3", "أذان 4", "أذان 5");
-        comboAdan.setOnAction(e -> {
-            mediaPlayer.pause();
-            iconPlayAdan.setGlyphName("PLAY");
+        comboAdhan.getItems().addAll("أذان 1", "أذان 2", "أذان 3", "أذان 4", "أذان 5");
+        comboAdhan.setOnAction(e -> {
+            initAdhan();
+            iconPlayAdhan.setGlyphName("PLAY");
         });
 
         // Init play/pause test adan
-        iconPlayAdan.setOnMouseClicked(e -> {
-            if (iconPlayAdan.getGlyphName().equals("PLAY")) {
-                Media hit = new Media(new File(ADHAN_PATH + "adan" + (comboAdan.getSelectionModel().getSelectedIndex() + 1) + ".mp3").toURI().toString());
-                mediaPlayer = new MediaPlayer(hit);
-                mediaPlayer.play();
-
-                iconPlayAdan.setGlyphName("PAUSE");
+        iconPlayAdhan.setOnMouseClicked(e -> {
+            if (iconPlayAdhan.getGlyphName().equals("PLAY")) {
+                Adhan.play();
+                iconPlayAdhan.setGlyphName("PAUSE");
             } else {
-                mediaPlayer.pause();
-                iconPlayAdan.setGlyphName("PLAY");
+                Adhan.pause();
+                iconPlayAdhan.setGlyphName("PLAY");
             }
         });
     }
 
     @FXML
     private void onCloseMenu() {
-        setShowSettings(false);
+        setShowView(false, settingsView);
 
         hamburgerTransition.setRate(-1);
         hamburgerTransition.play();
+
+        Adhan.pause();
     }
 
-    private void setShowSettings(boolean show) {
-        ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(500), paneSettings);
+    private void setShowView(boolean show, Parent view) {
+        ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(500), view);
         if (show) {
-            paneSettings.setVisible(true);
+            view.setVisible(true);
             scaleTransition.setFromX(0);
             scaleTransition.setFromY(0);
             scaleTransition.setToX(1);
@@ -261,15 +321,11 @@ public class PrayerTimesController implements Initializable {
             scaleTransition.setToX(0);
             scaleTransition.setToY(0);
             scaleTransition.setOnFinished(e -> {
-                paneSettings.setVisible(false);
+                view.setVisible(false);
             });
         }
         scaleTransition.play();
     }
-
-    /* End settings part */
-
-    /* Start settings log */
 
     private void loadSettingsLog() {
         ResourceBundle bundle = ResourceBundle.getBundle("com.houarizegai.prayertimes.resources.config.settings");
@@ -277,9 +333,10 @@ public class PrayerTimesController implements Initializable {
         // Make Tiaret city as default
         comboCities.getSelectionModel().select(Integer.parseInt(toUTF(bundle.getString("city"))));
         setPrayerTimes(comboCities.getSelectionModel().getSelectedItem());
+        //localTestPrayer();
 
-        tglRunAdan.setSelected(Boolean.valueOf(toUTF((bundle.getString("enableAdan")))));
-        comboAdan.getSelectionModel().select(Integer.parseInt(toUTF((bundle.getString("adan")))));
+        tglRunAdhan.setSelected(Boolean.valueOf(toUTF((bundle.getString("enableAdan")))));
+        comboAdhan.getSelectionModel().select(Integer.parseInt(toUTF((bundle.getString("adan")))));
     }
 
     private void saveSettingsLog() {
@@ -290,8 +347,8 @@ public class PrayerTimesController implements Initializable {
 
             // Set the properties value
             prop.setProperty("city", String.valueOf(comboCities.getSelectionModel().getSelectedIndex()));
-            prop.setProperty("enableAdan", String.valueOf(tglRunAdan.isSelected()));
-            prop.setProperty("adan", String.valueOf(comboAdan.getSelectionModel().getSelectedIndex()));
+            prop.setProperty("enableAdan", String.valueOf(tglRunAdhan.isSelected()));
+            prop.setProperty("adan", String.valueOf(comboAdhan.getSelectionModel().getSelectedIndex()));
 
             // Save properties to project root folder
             prop.store(output, null);
@@ -318,6 +375,6 @@ public class PrayerTimesController implements Initializable {
         return null;
     }
 
-    /* End settings log */
+    /* End settings part */
 
 }
