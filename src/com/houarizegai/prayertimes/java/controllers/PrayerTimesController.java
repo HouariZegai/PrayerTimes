@@ -218,7 +218,8 @@ public class PrayerTimesController implements Initializable {
     @FXML
     private void onClose() {
         saveSettingsLog();
-        Platform.exit();
+        // Platform.exit();
+        Launcher.stage.hide();
     }
 
     @FXML
@@ -231,7 +232,7 @@ public class PrayerTimesController implements Initializable {
     private void checkAdhanTime() {
         // Check prayer times with actual time
         String timeNow = lblTimeH.getText() + ":" + lblTimeM.getText();
-        System.out.println("time now: " + timeNow);
+        // System.out.println("time now: " + timeNow);
         checkTimeWithPrayer(timeNow, lblPrayerFajr, "الفجر");
         checkTimeWithPrayer(timeNow, lblPrayerDhuhr, "الظهر");
         checkTimeWithPrayer(timeNow, lblPrayerAsr, "العصر");
