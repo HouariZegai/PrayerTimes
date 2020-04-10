@@ -1,4 +1,4 @@
-package com.houarizegai.prayertimes.java.models;
+package com.houarizegai.prayertimes.models;
 
 public class PrayerTimesBuilder {
     private String fajr;

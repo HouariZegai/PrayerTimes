@@ -1,11 +1,11 @@
-package com.houarizegai.prayertimes.java.utils;
+package com.houarizegai.prayertimes.utils;
 
-import com.houarizegai.prayertimes.java.models.PrayerTimes;
-import com.houarizegai.prayertimes.java.models.PrayerTimesBuilder;
-import com.mashape.unirest.http.HttpResponse;
-import com.mashape.unirest.http.JsonNode;
-import com.mashape.unirest.http.Unirest;
-import com.mashape.unirest.http.exceptions.UnirestException;
+import com.houarizegai.prayertimes.models.PrayerTimes;
+import com.houarizegai.prayertimes.models.PrayerTimesBuilder;
+import kong.unirest.HttpResponse;
+import kong.unirest.JsonNode;
+import kong.unirest.Unirest;
+import kong.unirest.UnirestException;
 import org.json.JSONObject;
 
 public class WebService {
