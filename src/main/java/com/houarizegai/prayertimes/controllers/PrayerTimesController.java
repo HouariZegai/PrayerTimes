@@ -55,35 +55,25 @@ public class PrayerTimesController implements Initializable {
     @FXML
     private Label lblPrayerFajr, lblPrayerSunrise, lblPrayerDhuhr, lblPrayerAsr, lblPrayerMaghrib, lblPrayerIsha;
 
-    /* Start adhan part */
-
+    /* Adhan part */
     @FXML
     private StackPane alarmView;
-
     @FXML
     private Text txtAlarmPrayer, txtAlarmCity;
 
-    /* End adhan part */
-
-    /* Start settings part */
-
+    /* Settings part */
     @FXML
     private AnchorPane settingsView;
-
     @FXML
     private JFXToggleButton tglRunAdhan;
-
     @FXML
     private JFXComboBox<String> comboAdhan;
-
     @FXML
     private FontAwesomeIconView iconPlayAdhan;
 
-    HamburgerBasicCloseTransition hamburgerTransition;
+    private HamburgerBasicCloseTransition hamburgerTransition;
 
-    /* End settings part */
-
-    // For Make Stage Drageable
+    // Used to make stage draggable
     private double xOffset = 0;
     private double yOffset = 0;
 
@@ -95,7 +85,7 @@ public class PrayerTimesController implements Initializable {
         loadSettingsLog(); // load saved app stat
         initAdhan();
 
-        // make stage drageable
+        /* Make stage draggable */
         menuBar.setOnMousePressed(event -> {
             xOffset = event.getSceneX();
             yOffset = event.getSceneY();
@@ -105,23 +95,18 @@ public class PrayerTimesController implements Initializable {
             App.stage.setY(event.getScreenY() - yOffset);
             App.stage.setOpacity(0.7f);
         });
-        menuBar.setOnDragDone(e -> {
-            App.stage.setOpacity(1.0f);
-        });
-        menuBar.setOnMouseReleased(e -> {
-            App.stage.setOpacity(1.0f);
-        });
-
+        menuBar.setOnDragDone(e -> App.stage.setOpacity(1.0f));
+        menuBar.setOnMouseReleased(e -> App.stage.setOpacity(1.0f));
     }
 
     // Just for testing: change prayer times
     private void localTestPrayer() {
         PrayerTimes prayerTimes = new PrayerTimesBuilder()
-                .setFajr("00:00")
-                .setDhuhr("18:35")
-                .setAsr("18:24")
-                .setMaghrib("18:42")
-                .setIsha("18:43")
+                .fajr("00:00")
+                .dhuhr("18:35")
+                .asr("18:24")
+                .maghrib("18:42")
+                .isha("18:43")
                 .build();
 
         lblPrayerFajr.setText(prayerTimes.getFajr());
@@ -133,7 +118,7 @@ public class PrayerTimesController implements Initializable {
     }
 
     private void initDateAndClock() {
-        /* initialize clock (date & time) of prayer times */
+        /* Init clock (date & time) of prayer times */
         KeyFrame clockKeyFrame = new KeyFrame(Duration.ZERO, e -> {
             Date date = new Date();
             DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
@@ -145,7 +130,7 @@ public class PrayerTimesController implements Initializable {
             lblTimeM.setText(time[1]);
             lblTimeH.setText(time[0]);
 
-            // If new day change the prayer times
+            // Is it new day? => change the prayer times
             if (dateFormat.equals("00:00:00") && comboCities.getSelectionModel() != null) {
                 setPrayerTimes(comboCities.getSelectionModel().getSelectedItem());
             }
@@ -157,7 +142,7 @@ public class PrayerTimesController implements Initializable {
         clock.setCycleCount(Animation.INDEFINITE);
         clock.play();
 
-        /* Show and hide animation for separetor of time */
+        // Show/Hide animation for time separator
         KeyFrame clockSeparatorKeyFrame = new KeyFrame(Duration.ZERO, e -> {
             if (lblTimeSeparator.isVisible()) {
                 lblTimeSeparator.setVisible(false);
@@ -180,9 +165,7 @@ public class PrayerTimesController implements Initializable {
         comboCities.getItems().addAll(Constants.DZ_CITIES);
 
         // Add Event to ComboBox
-        comboCities.setOnAction(e -> {
-            setPrayerTimes(comboCities.getSelectionModel().getSelectedItem());
-        });
+        comboCities.setOnAction(e -> setPrayerTimes(comboCities.getSelectionModel().getSelectedItem()));
     }
 
     private void initAdhan() {
@@ -220,7 +203,7 @@ public class PrayerTimesController implements Initializable {
         App.stage.setIconified(true);
     }
 
-    /* Start alarm (adhan) part */
+    /* Alarm (Adhan) part */
 
     private void checkAdhanTime() {
         // Check prayer times with actual time
@@ -234,14 +217,12 @@ public class PrayerTimesController implements Initializable {
     }
 
     private void checkTimeWithPrayer(String time, Label lblPrayerTime, String prayerName) { // Check if it's the time of prayer
-        if(time.equals(lblPrayerTime.getText())) {
-            if(Adhan.canPlay() && !Adhan.isPlaying() && tglRunAdhan.isSelected()) {
-                Adhan.setCanPlay(false);
-                txtAlarmCity.setText(comboCities.getSelectionModel().getSelectedItem());
-                txtAlarmPrayer.setText(prayerName);
-                setShowView(true, alarmView);
-                Adhan.play();
-            }
+        if(time.equals(lblPrayerTime.getText()) && Adhan.canPlay() && !Adhan.isPlaying() && tglRunAdhan.isSelected()) {
+            Adhan.setCanPlay(false);
+            txtAlarmCity.setText(comboCities.getSelectionModel().getSelectedItem());
+            txtAlarmPrayer.setText(prayerName);
+            setShowView(true, alarmView);
+            Adhan.play();
         }
     }
 
@@ -252,9 +233,7 @@ public class PrayerTimesController implements Initializable {
         Adhan.launchPeriodStop();
     }
 
-    /* End alarm (adhan) part */
-
-    /* Start settings part */
+    /* Settings part */
 
     private void initMenu() { // Init settings
         /* Init show/hide menu */
@@ -314,17 +293,15 @@ public class PrayerTimesController implements Initializable {
             scaleTransition.setFromY(1);
             scaleTransition.setToX(0);
             scaleTransition.setToY(0);
-            scaleTransition.setOnFinished(e -> {
-                view.setVisible(false);
-            });
+            scaleTransition.setOnFinished(e -> view.setVisible(false));
         }
         scaleTransition.play();
     }
 
     private void loadSettingsLog() {
-        ResourceBundle bundle = ResourceBundle.getBundle("com.houarizegai.prayertimes.resources.config.settings");
+        ResourceBundle bundle = ResourceBundle.getBundle("config.settings");
 
-        // Make Tiaret city as default
+        // Make Tiaret city by default :D
         comboCities.getSelectionModel().select(Integer.parseInt(toUTF(bundle.getString("city"))));
         setPrayerTimes(comboCities.getSelectionModel().getSelectedItem());
         //localTestPrayer();
@@ -337,7 +314,7 @@ public class PrayerTimesController implements Initializable {
         Properties prop = new Properties();
         OutputStream output = null;
         try {
-            output = new FileOutputStream("src/com/houarizegai/prayertimes/resources/config/settings.properties");
+            output = new FileOutputStream("/config/settings.properties");
 
             // Set the properties value
             prop.setProperty("city", String.valueOf(comboCities.getSelectionModel().getSelectedIndex()));
@@ -368,7 +345,5 @@ public class PrayerTimesController implements Initializable {
         }
         return null;
     }
-
-    /* End settings part */
 
 }

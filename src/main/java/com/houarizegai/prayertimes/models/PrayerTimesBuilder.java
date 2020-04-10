@@ -11,32 +11,32 @@ public class PrayerTimesBuilder {
     public PrayerTimesBuilder() {
     }
 
-    public PrayerTimesBuilder setFajr(String fajr) {
+    public PrayerTimesBuilder fajr(String fajr) {
         this.fajr = fajr;
         return this;
     }
 
-    public PrayerTimesBuilder setSunrise(String sunrise) {
+    public PrayerTimesBuilder sunrise(String sunrise) {
         this.sunrise = sunrise;
         return this;
     }
 
-    public PrayerTimesBuilder setDhuhr(String dhuhr) {
+    public PrayerTimesBuilder dhuhr(String dhuhr) {
         this.dhuhr = dhuhr;
         return this;
     }
 
-    public PrayerTimesBuilder setAsr(String asr) {
+    public PrayerTimesBuilder asr(String asr) {
         this.asr = asr;
         return this;
     }
 
-    public PrayerTimesBuilder setMaghrib(String maghrib) {
+    public PrayerTimesBuilder maghrib(String maghrib) {
         this.maghrib = maghrib;
         return this;
     }
 
-    public PrayerTimesBuilder setIsha(String isha) {
+    public PrayerTimesBuilder isha(String isha) {
         this.isha = isha;
         return this;
     }

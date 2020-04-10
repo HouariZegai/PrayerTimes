@@ -25,12 +25,12 @@ public class WebService {
             if (!jsonRoot.has("results")) { // If city not found !
                 // Make empty prayer times
                 prayerTimes = new PrayerTimesBuilder()
-                        .setFajr("hh:mm")
-                        .setSunrise("hh:mm")
-                        .setDhuhr("hh:mm")
-                        .setAsr("hh:mm")
-                        .setMaghrib("hh:mm")
-                        .setIsha("hh:mm")
+                        .fajr("hh:mm")
+                        .sunrise("hh:mm")
+                        .dhuhr("hh:mm")
+                        .asr("hh:mm")
+                        .maghrib("hh:mm")
+                        .isha("hh:mm")
                         .build();
                 return prayerTimes;
             }
@@ -42,12 +42,12 @@ public class WebService {
 
             /* Edit Times of prayer in UI */
             prayerTimes = new PrayerTimesBuilder()
-                    .setFajr(jsonDate.getString("Fajr"))
-                    .setSunrise(jsonDate.getString("Sunrise"))
-                    .setDhuhr(jsonDate.getString("Dhuhr"))
-                    .setAsr(jsonDate.getString("Asr"))
-                    .setMaghrib(jsonDate.getString("Maghrib"))
-                    .setIsha(jsonDate.getString("Isha"))
+                    .fajr(jsonDate.getString("Fajr"))
+                    .sunrise(jsonDate.getString("Sunrise"))
+                    .dhuhr(jsonDate.getString("Dhuhr"))
+                    .asr(jsonDate.getString("Asr"))
+                    .maghrib(jsonDate.getString("Maghrib"))
+                    .isha(jsonDate.getString("Isha"))
                     .build();
 
             return prayerTimes;
@@ -55,12 +55,12 @@ public class WebService {
             //e.printStackTrace();
             // Connection error > make empty prayer times
             prayerTimes = new PrayerTimesBuilder()
-                    .setFajr("hh:mm")
-                    .setSunrise("hh:mm")
-                    .setDhuhr("hh:mm")
-                    .setAsr("hh:mm")
-                    .setMaghrib("hh:mm")
-                    .setIsha("hh:mm")
+                    .fajr("hh:mm")
+                    .sunrise("hh:mm")
+                    .dhuhr("hh:mm")
+                    .asr("hh:mm")
+                    .maghrib("hh:mm")
+                    .isha("hh:mm")
                     .build();
             return prayerTimes;
         }
