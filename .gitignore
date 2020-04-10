@@ -1,4 +1,11 @@
+# Idea
 out/
 .idea/
 *.iml
-*.json
+
+# Maven
+target/
+log/
+
+# Others
+resources
