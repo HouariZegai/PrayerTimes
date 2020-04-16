@@ -2,7 +2,6 @@ package com.houarizegai.prayertimes.utils;
 
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import javafx.util.Duration;
 
 import java.io.File;
 
@@ -12,8 +11,8 @@ public class Adhan {
     private static boolean canPlay = true;
 
     public static void setAdhan(String adhanName) {
-        Media hit = new Media(new File(Constants.ADHAN_PATH + adhanName + ".mp3").toURI().toString());
-        player = new MediaPlayer(hit);
+        Media media = new Media(new File(Constants.RESOURCES_PATH + "adhan\\" + adhanName).toURI().toString());
+        player = new MediaPlayer(media);
     }
 
     public static void play() {
@@ -41,7 +40,7 @@ public class Adhan {
         canPlay = false;
         new Thread(() -> {
             try {
-                Thread.sleep((long) Duration.minutes(1).toMillis());
+                Thread.sleep(60000L); // Sleep 1 min
             } catch(InterruptedException ie) {
                 ie.printStackTrace();
             }

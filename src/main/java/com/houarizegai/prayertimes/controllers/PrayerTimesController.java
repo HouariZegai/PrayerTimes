@@ -5,6 +5,7 @@ import com.houarizegai.prayertimes.models.PrayerTimes;
 import com.houarizegai.prayertimes.models.PrayerTimesBuilder;
 import com.houarizegai.prayertimes.utils.Adhan;
 import com.houarizegai.prayertimes.utils.Constants;
+import com.houarizegai.prayertimes.utils.Tools;
 import com.houarizegai.prayertimes.utils.WebService;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXHamburger;
@@ -19,8 +20,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 import org.kordamp.ikonli.fontawesome.FontAwesome;
@@ -32,9 +33,7 @@ import java.io.OutputStream;
 import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Properties;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class PrayerTimesController implements Initializable {
 
@@ -64,7 +63,7 @@ public class PrayerTimesController implements Initializable {
 
     /* Settings part */
     @FXML
-    private AnchorPane settingsView;
+    private VBox settingsView;
     @FXML
     private JFXToggleButton tglRunAdhan;
     @FXML
@@ -98,6 +97,8 @@ public class PrayerTimesController implements Initializable {
         });
         menuBar.setOnDragDone(e -> App.stage.setOpacity(1.0f));
         menuBar.setOnMouseReleased(e -> App.stage.setOpacity(1.0f));
+
+        localTestPrayer(); // Just for testing
     }
 
     // Change prayer times (Just for testing)
@@ -105,7 +106,7 @@ public class PrayerTimesController implements Initializable {
         PrayerTimes prayerTimes = new PrayerTimesBuilder()
                 .fajr("00:00")
                 .dhuhr("18:35")
-                .asr("15:52")
+                .asr("16:14")
                 .maghrib("18:42")
                 .isha("18:43")
                 .build();
@@ -170,7 +171,7 @@ public class PrayerTimesController implements Initializable {
     }
 
     private void initAdhan() {
-        Adhan.setAdhan("adan" + (comboAdhan.getSelectionModel().getSelectedIndex() + 1));
+        Adhan.setAdhan(comboAdhan.getSelectionModel().getSelectedItem());
     }
 
     private void setPrayerTimes(String city) {
@@ -210,6 +211,7 @@ public class PrayerTimesController implements Initializable {
         // Check prayer times with actual time
         String timeNow = lblTimeH.getText() + ":" + lblTimeM.getText();
         // System.out.println("time now: " + timeNow);
+
         checkTimeWithPrayer(timeNow, lblPrayerFajr, "ال-جر");
         checkTimeWithPrayer(timeNow, lblPrayerDhuhr, "الظهر");
         checkTimeWithPrayer(timeNow, lblPrayerAsr, "العصر");
@@ -252,8 +254,11 @@ public class PrayerTimesController implements Initializable {
             hamburgerTransition.play();
         });
 
-        // Init combo Adan
-        comboAdhan.getItems().addAll("أذان 1", "أذان 2", "أذان 3", "أذان 4", "أذان 5");
+        /* Init Adan combobox */
+        List<String> adhanFilesName = Tools.getFilesNameFromFolder(Constants.RESOURCES_PATH + "adhan");
+        if(adhanFilesName != null && !adhanFilesName.isEmpty())
+            comboAdhan.getItems().addAll(Optional.ofNullable(adhanFilesName).get());
+
         comboAdhan.setOnAction(e -> {
             initAdhan();
             iconPlayAdhan.setIconLiteral(FontAwesome.PLAY.getDescription());
@@ -305,22 +310,21 @@ public class PrayerTimesController implements Initializable {
         // Make Tiaret city by default :D
         comboCities.getSelectionModel().select(Integer.parseInt(toUTF(bundle.getString("city"))));
         setPrayerTimes(comboCities.getSelectionModel().getSelectedItem());
-        //localTestPrayer();
 
-        tglRunAdhan.setSelected(Boolean.valueOf(toUTF((bundle.getString("enableAdan")))));
-        comboAdhan.getSelectionModel().select(Integer.parseInt(toUTF((bundle.getString("adan")))));
+        tglRunAdhan.setSelected(Boolean.valueOf(toUTF((bundle.getString("enableAdhan")))));
+        comboAdhan.getSelectionModel().select(Integer.parseInt(toUTF((bundle.getString("adhan")))));
     }
 
     private void saveSettingsLog() {
         Properties prop = new Properties();
         OutputStream output = null;
         try {
-            output = new FileOutputStream("/config/settings.properties");
+            output = new FileOutputStream(Constants.RESOURCES_PATH + "config\\settings.properties");
 
             // Set the properties value
             prop.setProperty("city", String.valueOf(comboCities.getSelectionModel().getSelectedIndex()));
-            prop.setProperty("enableAdan", String.valueOf(tglRunAdhan.isSelected()));
-            prop.setProperty("adan", String.valueOf(comboAdhan.getSelectionModel().getSelectedIndex()));
+            prop.setProperty("enableAdhan", String.valueOf(tglRunAdhan.isSelected()));
+            prop.setProperty("adhan", String.valueOf(comboAdhan.getSelectionModel().getSelectedIndex()));
 
             // Save properties to project root folder
             prop.store(output, null);

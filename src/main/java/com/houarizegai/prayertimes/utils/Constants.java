@@ -12,7 +12,7 @@ public class Constants {
             "Bordj Bou Arreridj", "Boumerdas", "El Tarf", "Tinduf", "Tissemsilt", "El Oued", "Khenchela",
             "Souk Ahras", "Tipasa", "Mila", "Aïn Defla", "Naâma", "Aïn Témouchent", "Ghardaïa", "Relizane"};
 
-    public static final String ADHAN_PATH;
+    public static final String RESOURCES_PATH;
 
     static {
         // Get Path of Project
@@ -20,6 +20,6 @@ public class Constants {
         // convert the path to absolute
         String currentAbsolutePath = currentRelativePath.toAbsolutePath().toString();
 
-        ADHAN_PATH = currentAbsolutePath + "\\src\\main\\resources\\adan\\";
+        RESOURCES_PATH = currentAbsolutePath + "\\src\\main\\resources\\";
     }
 }
