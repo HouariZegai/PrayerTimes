@@ -37,18 +37,15 @@ public class Adhan {
         Adhan.canPlay = canPlay;
     }
 
-    public static void launchPeriodStop() { // if i stop adhan not play again until next prayer
+    public static void launchPeriodStop() { // If I stop Adhan don't play it again until the next prayer
         canPlay = false;
-        (new Thread(){
-            @Override
-            public void run() {
-                try {
-                    Thread.sleep((long) Duration.minutes(1).toMillis());
-                } catch(InterruptedException ie) {
-                    ie.printStackTrace();
-                }
-                canPlay = true;
+        new Thread(() -> {
+            try {
+                Thread.sleep((long) Duration.minutes(1).toMillis());
+            } catch(InterruptedException ie) {
+                ie.printStackTrace();
             }
+            canPlay = true;
         }).start();
     }
 

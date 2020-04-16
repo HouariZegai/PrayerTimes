@@ -10,7 +10,6 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.controls.JFXToggleButton;
 import com.jfoenix.transitions.hamburger.HamburgerBasicCloseTransition;
-import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.ScaleTransition;
@@ -24,6 +23,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
+import org.kordamp.ikonli.fontawesome.FontAwesome;
+import org.kordamp.ikonli.javafx.FontIcon;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -69,7 +70,7 @@ public class PrayerTimesController implements Initializable {
     @FXML
     private JFXComboBox<String> comboAdhan;
     @FXML
-    private FontAwesomeIconView iconPlayAdhan;
+    private FontIcon iconPlayAdhan;
 
     private HamburgerBasicCloseTransition hamburgerTransition;
 
@@ -99,12 +100,12 @@ public class PrayerTimesController implements Initializable {
         menuBar.setOnMouseReleased(e -> App.stage.setOpacity(1.0f));
     }
 
-    // Just for testing: change prayer times
+    // Change prayer times (Just for testing)
     private void localTestPrayer() {
         PrayerTimes prayerTimes = new PrayerTimesBuilder()
                 .fajr("00:00")
                 .dhuhr("18:35")
-                .asr("18:24")
+                .asr("15:52")
                 .maghrib("18:42")
                 .isha("18:43")
                 .build();
@@ -209,7 +210,7 @@ public class PrayerTimesController implements Initializable {
         // Check prayer times with actual time
         String timeNow = lblTimeH.getText() + ":" + lblTimeM.getText();
         // System.out.println("time now: " + timeNow);
-        checkTimeWithPrayer(timeNow, lblPrayerFajr, "الفجر");
+        checkTimeWithPrayer(timeNow, lblPrayerFajr, "ال-جر");
         checkTimeWithPrayer(timeNow, lblPrayerDhuhr, "الظهر");
         checkTimeWithPrayer(timeNow, lblPrayerAsr, "العصر");
         checkTimeWithPrayer(timeNow, lblPrayerMaghrib, "المغرب");
@@ -255,17 +256,17 @@ public class PrayerTimesController implements Initializable {
         comboAdhan.getItems().addAll("أذان 1", "أذان 2", "أذان 3", "أذان 4", "أذان 5");
         comboAdhan.setOnAction(e -> {
             initAdhan();
-            iconPlayAdhan.setGlyphName("PLAY");
+            iconPlayAdhan.setIconLiteral(FontAwesome.PLAY.getDescription());
         });
 
         // Init play/pause test adan
         iconPlayAdhan.setOnMouseClicked(e -> {
-            if (iconPlayAdhan.getGlyphName().equals("PLAY")) {
+            if (iconPlayAdhan.getIconLiteral().equals(FontAwesome.PLAY.getDescription())) {
                 Adhan.play();
-                iconPlayAdhan.setGlyphName("PAUSE");
+                iconPlayAdhan.setIconLiteral(FontAwesome.PAUSE.getDescription());
             } else {
                 Adhan.pause();
-                iconPlayAdhan.setGlyphName("PLAY");
+                iconPlayAdhan.setIconLiteral(FontAwesome.PLAY.getDescription());
             }
         });
     }

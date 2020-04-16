@@ -20,6 +20,6 @@ public class Constants {
         // convert the path to absolute
         String currentAbsolutePath = currentRelativePath.toAbsolutePath().toString();
 
-        ADHAN_PATH = currentAbsolutePath + "\\src\\com\\houarizegai\\prayertimes\\resources\\adan\\";
+        ADHAN_PATH = currentAbsolutePath + "\\src\\main\\resources\\adan\\";
     }
 }
