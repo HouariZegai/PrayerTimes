@@ -1,0 +1,31 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'org.openjfx.javafxplugin' version '0.0.8'
+}
+
+group 'com.houarizegai'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    compile 'com.jfoenix:jfoenix:9.0.8'
+    compile 'org.kordamp.ikonli:ikonli-javafx:11.4.0'
+    compile 'org.kordamp.ikonli:ikonli-fontawesome-pack:11.4.0'
+    compile 'org.kordamp.ikonli:ikonli-icomoon-pack:11.4.0'
+    compile 'com.konghq:unirest-java:3.7.02'
+    compile 'org.json:json:20190722'
+}
+
+javafx {
+    version = "11.0.2"
+    modules = [ 'javafx.base', 'javafx.controls', 'javafx.fxml', 'javafx.graphics', 'javafx.media' ]
+}
+
+mainClassName="com.houarizegai.prayertimes.App"
