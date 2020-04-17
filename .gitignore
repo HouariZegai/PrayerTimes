@@ -3,9 +3,6 @@ out/
 .idea/
 *.iml
 
-# Others
-resources
-
 # Ignore Gradle
 .gradle
 **/build/
@@ -19,3 +16,6 @@ gradle-app.setting
 
 # Cache of project
 .gradletasknamecache
+
+# Other
+*.json
