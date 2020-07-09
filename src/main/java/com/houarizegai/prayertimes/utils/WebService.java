@@ -12,8 +12,7 @@ public class WebService {
 
     private static final String END_POINT = "https://api.pray.zone/v2/times/today.json";
 
-    public static PrayerTimes getPrayerTimes(String city) { // Get prayer times from WebService
-        PrayerTimes prayerTimes = null;
+    public static PrayerTimes getPrayerTimes(String city) {
 
         try {
             HttpResponse<JsonNode> jsonResponse = Unirest.get(END_POINT)
@@ -22,48 +21,32 @@ public class WebService {
 
             JSONObject jsonRoot = new JSONObject(jsonResponse.getBody().toString());
 
-            if (!jsonRoot.has("results")) { // If city not found !
-                // Make empty prayer times
-                prayerTimes = new PrayerTimesBuilder()
-                        .fajr("hh:mm")
-                        .sunrise("hh:mm")
-                        .dhuhr("hh:mm")
-                        .asr("hh:mm")
-                        .maghrib("hh:mm")
-                        .isha("hh:mm")
+            if (jsonRoot.has("results")) { // Is city founded?
+                JSONObject jsonDate = jsonRoot.getJSONObject("results")
+                        .getJSONArray("datetime")
+                        .getJSONObject(0)
+                        .getJSONObject("times");
+
+                return new PrayerTimesBuilder()
+                        .fajr(jsonDate.getString("Fajr"))
+                        .sunrise(jsonDate.getString("Sunrise"))
+                        .dhuhr(jsonDate.getString("Dhuhr"))
+                        .asr(jsonDate.getString("Asr"))
+                        .maghrib(jsonDate.getString("Maghrib"))
+                        .isha(jsonDate.getString("Isha"))
                         .build();
-                return prayerTimes;
             }
-
-            JSONObject jsonDate = jsonRoot.getJSONObject("results")
-                    .getJSONArray("datetime")
-                    .getJSONObject(0)
-                    .getJSONObject("times");
-
-            /* Edit Times of prayer in UI */
-            prayerTimes = new PrayerTimesBuilder()
-                    .fajr(jsonDate.getString("Fajr"))
-                    .sunrise(jsonDate.getString("Sunrise"))
-                    .dhuhr(jsonDate.getString("Dhuhr"))
-                    .asr(jsonDate.getString("Asr"))
-                    .maghrib(jsonDate.getString("Maghrib"))
-                    .isha(jsonDate.getString("Isha"))
-                    .build();
-
-            return prayerTimes;
         } catch (UnirestException e) {
             //e.printStackTrace();
-            // Connection error > make empty prayer times
-            prayerTimes = new PrayerTimesBuilder()
-                    .fajr("hh:mm")
-                    .sunrise("hh:mm")
-                    .dhuhr("hh:mm")
-                    .asr("hh:mm")
-                    .maghrib("hh:mm")
-                    .isha("hh:mm")
-                    .build();
-            return prayerTimes;
         }
 
+        return new PrayerTimesBuilder()
+                .fajr("--:--")
+                .sunrise("--:--")
+                .dhuhr("--:--")
+                .asr("--:--")
+                .maghrib("--:--")
+                .isha("--:--")
+                .build();
     }
 }
