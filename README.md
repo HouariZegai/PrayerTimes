@@ -7,7 +7,7 @@ Desktop app for calculating Muslim prayer times 🕌 and setting an alarm (Adhan
 
 ## Features
 * [x] Simple to use 
-* [x] All cities of Algeria have been added
+* [x] All Algeria cities have been added
 * [x] Remember your settings (selected city, adhan, ..ect)
 * [x] Can hide the app to be on the system tray
 
@@ -38,10 +38,5 @@ Adhan (Alarm)           |
 ## Contributing 💡
 If you want to contribute to this project and make it better with new ideas, your pull request is very welcomed.
 If you find any issue just put it in the repository issue section, thank you.
-
-## Contact me
-Email: houarizegai14@gmail.com  
-LinkedIn: [HouariZegai](https://linkedin.com/in/houarizegai)  
-Twitter: [@HouariZegai](https://twitter.com/houarizegai)
-
+ 
 .سبحَانَكَ اللَّهُمَّ وَبِحَمْدِكَ، أَشْهَدُ أَنْ لا إِلهَ إِلأَ انْتَ أَسْتَغْفِرُكَ وَأَتْوبُ إِلَيْكَ
