@@ -2,7 +2,6 @@ package com.houarizegai.prayertimes.controllers;
 
 import com.houarizegai.prayertimes.App;
 import com.houarizegai.prayertimes.models.PrayerTimes;
-import com.houarizegai.prayertimes.models.PrayerTimesBuilder;
 import com.houarizegai.prayertimes.utils.Adhan;
 import com.houarizegai.prayertimes.utils.Constants;
 import com.houarizegai.prayertimes.utils.Tools;
@@ -97,26 +96,6 @@ public class PrayerTimesController implements Initializable {
         });
         menuBar.setOnDragDone(e -> App.stage.setOpacity(1.0f));
         menuBar.setOnMouseReleased(e -> App.stage.setOpacity(1.0f));
-
-        localTestPrayer(); // Just for testing
-    }
-
-    // Change prayer times (Just for testing)
-    private void localTestPrayer() {
-        PrayerTimes prayerTimes = new PrayerTimesBuilder()
-                .fajr("00:00")
-                .dhuhr("18:35")
-                .asr("16:14")
-                .maghrib("18:42")
-                .isha("18:43")
-                .build();
-
-        lblPrayerFajr.setText(prayerTimes.getFajr());
-        lblPrayerSunrise.setText(prayerTimes.getSunrise());
-        lblPrayerDhuhr.setText(prayerTimes.getDhuhr());
-        lblPrayerAsr.setText(prayerTimes.getAsr());
-        lblPrayerMaghrib.setText(prayerTimes.getMaghrib());
-        lblPrayerIsha.setText(prayerTimes.getIsha());
     }
 
     private void initDateAndClock() {
@@ -162,11 +141,8 @@ public class PrayerTimesController implements Initializable {
     }
 
     private void initComboCities() {
-        // Add cities names to ComboBox
-        comboCities.getItems().clear();
-        comboCities.getItems().addAll(Constants.DZ_CITIES);
+        comboCities.getItems().setAll(Constants.DZ_CITIES);
 
-        // Add Event to ComboBox
         comboCities.setOnAction(e -> setPrayerTimes(comboCities.getSelectionModel().getSelectedItem()));
     }
 
@@ -208,9 +184,7 @@ public class PrayerTimesController implements Initializable {
     /* Alarm (Adhan) part */
 
     private void checkAdhanTime() {
-        // Check prayer times with actual time
         String timeNow = lblTimeH.getText() + ":" + lblTimeM.getText();
-        // System.out.println("time now: " + timeNow);
 
         checkTimeWithPrayer(timeNow, lblPrayerFajr, "ال-جر");
         checkTimeWithPrayer(timeNow, lblPrayerDhuhr, "الظهر");
@@ -345,10 +319,9 @@ public class PrayerTimesController implements Initializable {
     private String toUTF(String val) {
         try {
             return new String(val.getBytes("ISO-8859-1"), "UTF-8");
-        } catch(Exception ex) {
-            ex.printStackTrace();
+        } catch(Exception e) {
+            throw new IllegalArgumentException(e.getMessage());
         }
-        return null;
     }
 
 }

@@ -1,7 +1,6 @@
 package com.houarizegai.prayertimes.utils;
 
 import com.houarizegai.prayertimes.models.PrayerTimes;
-import com.houarizegai.prayertimes.models.PrayerTimesBuilder;
 import kong.unirest.HttpResponse;
 import kong.unirest.JsonNode;
 import kong.unirest.Unirest;
@@ -10,12 +9,12 @@ import org.json.JSONObject;
 
 public class WebService {
 
-    private static final String END_POINT = "https://api.pray.zone/v2/times/today.json";
+    private static final String PRAYER_TIMES_END_POINT = "https://api.pray.zone/v2/times/today.json";
 
     public static PrayerTimes getPrayerTimes(String city) {
 
         try {
-            HttpResponse<JsonNode> jsonResponse = Unirest.get(END_POINT)
+            HttpResponse<JsonNode> jsonResponse = Unirest.get(PRAYER_TIMES_END_POINT)
                     .queryString("city", city)
                     .asJson();
 
@@ -27,7 +26,7 @@ public class WebService {
                         .getJSONObject(0)
                         .getJSONObject("times");
 
-                return new PrayerTimesBuilder()
+                return PrayerTimes.builder()
                         .fajr(jsonDate.getString("Fajr"))
                         .sunrise(jsonDate.getString("Sunrise"))
                         .dhuhr(jsonDate.getString("Dhuhr"))
@@ -40,7 +39,7 @@ public class WebService {
             //e.printStackTrace();
         }
 
-        return new PrayerTimesBuilder()
+        return PrayerTimes.builder()
                 .fajr("--:--")
                 .sunrise("--:--")
                 .dhuhr("--:--")

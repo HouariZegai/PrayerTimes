@@ -21,6 +21,8 @@ dependencies {
     compile 'org.kordamp.ikonli:ikonli-icomoon-pack:11.4.0'
     compile 'com.konghq:unirest-java:3.7.02'
     compile 'org.json:json:20190722'
+    compileOnly 'org.projectlombok:lombok:1.18.16'
+    annotationProcessor 'org.projectlombok:lombok:1.18.16'
 }
 
 javafx {
