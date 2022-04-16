@@ -12,31 +12,26 @@ Desktop app for calculating Muslim prayer times 🕌 and setting an alarm (Adhan
 * [x] Can hide the app to be on the system tray
 
 ## Screenshots
-Prayer times           | Settings
+Main screen           | Settings Page
 :---------------------:|:------------------:
 ![prayer times - screenshoot](screenshoots/v1/prayer_times.PNG) | ![prayer times - screenshoot](screenshoots/v1/settings.PNG)
 Adhan (Alarm)           |
 ![adhan alarm - screenshoot](screenshoots/v1/adhan_alarm.PNG) |
 
 ## Requirements
-* JDK11+
-* Internet connection
-
-## Libraries used
-* JFoenix (Material design)
-* Ikonli (Icons)
-* Unirest (Get data from webservice)
-* JSON (JSON Parser)
+* Java11+
+* Maven
 
 ## Installation
-1. Download the repository files (project) from the download section or clone this project by typing in the bash the following command:
-
-       git clone https://github.com/HouariZegai/PrayerTimes.git
-2. Import it in Intellij IDEA or any other Java IDE and let Gradle download the required dependencies for you.
-3. Run the application :D
+1. Download the repository (project) from the download section or clone it using the following command:
+   ```shell
+   git clone https://github.com/HouariZegai/PrayerTimes.git
+   ```
+2. Run the app by running the maven command inside the project folder:
+   ```shell
+   mvn clean javafx:run
+   ```
 
 ## Contributing 💡
 If you want to contribute to this project and make it better with new ideas, your pull request is very welcomed.
 If you find any issue just put it in the repository issue section, thank you.
- 
-.سبحَانَكَ اللَّهُمَّ وَبِحَمْدِكَ، أَشْهَدُ أَنْ لا إِلهَ إِلأَ انْتَ أَسْتَغْفِرُكَ وَأَتْوبُ إِلَيْكَ
