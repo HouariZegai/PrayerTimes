@@ -19,7 +19,7 @@
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 <?import org.kordamp.ikonli.javafx.StackedFontIcon?>
 
-<BorderPane prefWidth="450.0" stylesheets="@../css/prayer-times.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.houarizegai.prayertimes.controllers.PrayerTimesController">
+<BorderPane prefWidth="450.0" stylesheets="@../css/prayer-times.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.houarizegai.prayertimes.controller.PrayerTimesController">
    <center>
       <StackPane>
          <children>
