@@ -15,7 +15,7 @@
         <jfoenix.version>9.0.10</jfoenix.version>
         <ikonli.version>12.3.1</ikonli.version>
         <unirest-java.version>3.13.8</unirest-java.version>
-        <json.version>20220320</json.version>
+        <json.version>20230227</json.version>
         <lombok.version>1.18.22</lombok.version>
     </properties>
 
